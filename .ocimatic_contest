@@ -1,1 +1,8 @@
-{}
+{
+    "tasks": [
+        "alpinista",
+        "llave",
+        "check",
+        "knapsack"
+    ]
+}
