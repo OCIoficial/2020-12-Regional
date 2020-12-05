@@ -2,24 +2,34 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
 
-\title{Ejemplo}
+\title{Llaves}
 
 \begin{document}
 \begin{problemDescription}
-\lipsum[1-3]
+El equipo de hackers de la Organización de Cyberseguridad Informática (OCI) ha decidido hackear al gobierno. El problema es que para poder acceder a los computadores que quieren hackear, deben atravesar una serie de puertas cerradas con llave.
+
+Ellos tienen unas llaves y saben la forma de las cerraduras.
+
+Cada llave tiene una cantidad de ``dientes'' de distintas alturas, y conocen la forma de cada cerradura, por lo que saben cuáles son las alturas necesarias para abrir cada puerta. Además, una de las hackers sabe de herrería, por lo que puede afilar los dientes y hacerlos más cortos (pero no más largos).
+
+La OCI sabe que sabes programar bien, por lo que te ha pedido ayuda para determinar si las llaves que tienen les permitirán abrir las puertas y lograr acceder a los computadores.
+
+Para esto, ellos te entregarán una serie de números que corresponde a una llave (las alturas de sus dientes, en orden) y una serie de números que corresponde a la forma de la cerradura (las alturas necesarias de cada diente, en orden), y tú deberás determinar si es posible afilar los dientes de la llave para abrir esa puerta.
 \end{problemDescription}
 
 \begin{inputDescription}
-\lipsum[1]
+En la primera, un entero $n$ que representa la cantidad de dientes de la llave.\\
+En la segunda, $n$ números separados por espacios, que representan las alturas de cada diente de la llave.\\
+En la tercera, $n$ números separados por espacios, que representan las alturas necesarias de cada diente para abrir la puerta.\\
 \end{inputDescription}
 
 \begin{outputDescription}
-\lipsum[1]
+Una sola línea, con ``si'' si es posible abrir la puerta, y ``no'' en caso contrario.
 \end{outputDescription}
 
 \begin{scoreDescription}
   \subtask{20}
-  Descripción Subtarea1
+  Los dientes de la llave y las alturas necesarias son menores a 10.
   \subtask{30}
   Descripción Subtarea2
   \subtask{50}
