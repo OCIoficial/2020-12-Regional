@@ -2,28 +2,66 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
 
-\title{Ejemplo}
+\title{Check}
 
 \begin{document}
 \begin{problemDescription}
-\lipsum[1-3]
+Elizabeth es una maestra mundial de ajedrez, gracias a sus constantes
+victorias su popularidad ha aumentado enormemente, atrayendo cientos
+de jugadores que quieren desafiarla. Para maximizar la cantidad de
+jugadores que puede derrotar en un día, Elizabeth ha decidido jugar
+docenas de partidas simultaneamente. 
+
+En su experiencia jugando multiples partidas simultaneamente,
+Elizabeth ha notado que a algunos jugadores les toma tiempo reconocer
+cuando pierden, por lo que ella debe explicar el check mate, lo que le
+quita tiempo de las otras partidas. 
+
+Ayuda a Elizabeth con un programa que le permita a sus rivales saber
+cuando el tablero está en una posición de check mate.
+
+TODO: explicar el check mate
+
+  Consideraremos el movimiento de 5 tipos de piezas: la torre, el alfil, la reina, el rey y el caballo.
+  A continuación se describen las reglas de movimiento de cada pieza.
+  Adicionalmente, la figura de más abajo muestra las posibles casillas en un tablero de $5\times 5$ a las que podría moverse cada pieza en un solo movimiento.
+  \begin{itemize}
+    \item \textbf{Torre:} La torre puede moverse en línea recta de forma horizontal o vertical cuantas casillas quiera en un movimiento.
+    \item \textbf{Alfil:} El alfil puede moverse a lo largo de una diagonal cuantas casillas quiera en un movimiento.
+    \item \textbf{Reina:} La reina es una combinación de la torre y el alfil, ya que puede moverse en diagonal, horizontal o verticalmente cuantas casillas quiera en un movimiento.
+    \item \textbf{Rey:} El rey, al igual que la reina, puede moverse en cualquier dirección pero solo una casilla por movimiento.
+    \item \textbf{Caballo:} El caballo es la pieza con el movimiento más complicado. Su movimiento es en forma de ``L'', es decir, siempre se mueve 2 casillas en una dirección (horizontal o vertical), y luego una casilla en la otra dirección.
+  \end{itemize}
+
 \end{problemDescription}
 
 \begin{inputDescription}
-\lipsum[1]
+    La entrada comienza con una linea que contiene un entero $ 1 < n
+    \leq 16$ representando la cantidad de piezas en el tablero.
+
+    Las siguientes $n$ lineas representan cada una de las piezas en el
+    tablero en el formato $c, p, y, x$, donde $c$ representa el color
+    de la pieza, por lo que puede tomar valors $0 = $ blanca o $1
+    = $ negra. $p$ es el tipo de pieza: $0 =$ torre, $1 = $ alfil, $2
+    = $ Reina, $3 = rey$, $4 = $ caballo. $0 \leq y < 8$ es la fila en
+    la cual se encutra ubicada la pieza en el tablero, y $x$ es la
+    columna de la pieza en el tablero. La esquina inferior izquierda
+    es (0, 0).
 \end{inputDescription}
 
 \begin{outputDescription}
-\lipsum[1]
+    Tu programa debe imprimir una única linea con solo un 1 si es
+    Elizabeth (negras) tiene a su oponente en jaque mate.
 \end{outputDescription}
 
 \begin{scoreDescription}
   \subtask{20}
-  Descripción Subtarea1
+  El jugador blanco tiene solo una pieza: el rey.
   \subtask{30}
-  Descripción Subtarea2
+  Elizabeth solo controla peones y caballos. 
   \subtask{50}
-  Descripción Subtarea3
+  No hay restricciones en la cantidad o tipo de piezas que Elizabeth y
+  su oponente pueden controlar.
 \end{scoreDescription}
 
 \begin{sampleDescription}
