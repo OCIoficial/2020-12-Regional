@@ -27,6 +27,12 @@
 
 [Subtask 2]
   # Random tests
+  1 ; copy attic/manual/mate-with-knight.in
+  1 ; copy attic/manual/wrong-mate-with-knight.in
+
+
+[Subtask 3]
+  # Random tests
   1 ; random.java 10 20 30
   1 ; random.java 20 30 40
 
