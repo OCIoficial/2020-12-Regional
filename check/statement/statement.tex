@@ -22,7 +22,7 @@ cuando el tablero está en una posición de check mate.
 
 TODO: explicar el check mate
 
-  Consideraremos el movimiento de 5 tipos de piezas: la torre, el alfil, la reina, el rey y el caballo.
+  En el ajedrez existen 6 tipos de piezas: la torre, el alfil, la reina, el rey, el caballo y el peón.
   A continuación se describen las reglas de movimiento de cada pieza.
   Adicionalmente, la figura de más abajo muestra las posibles casillas en un tablero de $5\times 5$ a las que podría moverse cada pieza en un solo movimiento.
   \begin{itemize}
@@ -31,6 +31,7 @@ TODO: explicar el check mate
     \item \textbf{Reina:} La reina es una combinación de la torre y el alfil, ya que puede moverse en diagonal, horizontal o verticalmente cuantas casillas quiera en un movimiento.
     \item \textbf{Rey:} El rey, al igual que la reina, puede moverse en cualquier dirección pero solo una casilla por movimiento.
     \item \textbf{Caballo:} El caballo es la pieza con el movimiento más complicado. Su movimiento es en forma de ``L'', es decir, siempre se mueve 2 casillas en una dirección (horizontal o vertical), y luego una casilla en la otra dirección.
+    \item \textbf{Peón:} El peón puede moverse solamente hacia adelante, pero al capturar solo puede hacerlo diagonalmente en una casilla hacia adelante.
   \end{itemize}
 
 \end{problemDescription}
@@ -43,9 +44,9 @@ TODO: explicar el check mate
     tablero en el formato $c, p, y, x$, donde $c$ representa el color
     de la pieza, por lo que puede tomar valors $0 = $ blanca o $1
     = $ negra. $p$ es el tipo de pieza: $0 =$ torre, $1 = $ alfil, $2
-    = $ Reina, $3 = rey$, $4 = $ caballo. $0 \leq y < 8$ es la fila en
+    = $ Reina, $3 = rey$, $4 = $ caballo, $5 = $ peón. $0 \leq y < 8$ es la fila en
     la cual se encutra ubicada la pieza en el tablero, y $x$ es la
-    columna de la pieza en el tablero. La esquina inferior izquierda
+    columna de la pieza en el tablero. La esquina superior izquierda
     es (0, 0).
 \end{inputDescription}
 
@@ -58,7 +59,7 @@ TODO: explicar el check mate
   \subtask{20}
   El jugador blanco tiene solo una pieza: el rey.
   \subtask{30}
-  Elizabeth solo controla peones y caballos. 
+  Elizabeth solo controla peones y caballos.
   \subtask{50}
   No hay restricciones en la cantidad o tipo de piezas que Elizabeth y
   su oponente pueden controlar.
