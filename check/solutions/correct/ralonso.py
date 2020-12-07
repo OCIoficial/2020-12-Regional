@@ -237,7 +237,7 @@ def get_moves_for_white_piece(board: Board, y: int, x: int, piece: Piece) -> Gen
         undo(board, y, x, ty, tx, captured)
 
 
-def solve(pieces: Iterable[Tuple[int, int, int, int]]) -> bool:
+def is_checkmate_over_white(pieces: Iterable[Tuple[int, int, int, int]]) -> bool:
     """Resolves whether the given piece tuples represent black checkmating white or not."""
     board: Board = [[None for _ in range(8)] for _ in range(8)]
 
@@ -261,11 +261,11 @@ def solve(pieces: Iterable[Tuple[int, int, int, int]]) -> bool:
 def main() -> None:
     """Solves the problem by parsing the input and calling solve(pieces)."""
     _ = int(input())
-    pieces = (tuple(map(int, (line.split()))) for line in sys.stdin)
+    pieces = list(tuple(map(int, (line.split()))) for line in sys.stdin)
 
     # Here we assume the input matches the expected format.
     # noinspection PyTypeChecker
-    print(1 if solve(pieces) else 0)
+    print(1 if is_checkmate_over_white(pieces) else 0)
 
 
 if __name__ == "__main__":
