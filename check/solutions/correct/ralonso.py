@@ -29,7 +29,7 @@ KNIGHT_MOVES = (
 )
 
 KING_MOVES = (
-    (+1, -1), (+1, +0), (-1, +1),
+    (+1, -1), (+1, +0), (+1, +1),
     (+0, -1),           (+0, +1),
     (-1, -1), (-1, +0), (-1, +1),
 )
@@ -197,7 +197,7 @@ def get_moves_for_white_piece(board: Board, y: int, x: int, piece: Piece) -> Gen
 
             captured = board[ty][tx]
             if captured and captured[0] is Color.WHITE:
-                break
+                continue
             move(board, y, x, ty, tx)
             yield board
             undo(board, y, x, ty, tx, captured)
@@ -210,7 +210,7 @@ def get_moves_for_white_piece(board: Board, y: int, x: int, piece: Piece) -> Gen
 
             captured = board[ty][tx]
             if captured and captured[0] is Color.WHITE:
-                break
+                continue
             move(board, y, x, ty, tx)
             yield board
             undo(board, y, x, ty, tx, captured)
@@ -223,7 +223,7 @@ def get_moves_for_white_piece(board: Board, y: int, x: int, piece: Piece) -> Gen
 
             captured = board[ty][tx]
             if captured and captured[0] is Color.WHITE:
-                break
+                continue
             move(board, y, x, ty, tx)
             yield board
             undo(board, y, x, ty, tx, captured)
