@@ -14,28 +14,28 @@
 
 [Subtask 1]
   # Use sample data as test
+  # TODO ensure they match the subtask difficulty
   1 ; copy statement/sample-1.in
   1 ; copy statement/sample-2.in
 
-  # Manual test case
-  2 ; copy attic/manual-1.in
-
-  # Random tests
-  3 ; random.cpp 10 100
-  3 ; random.cpp 100 1000
-
 
 [Subtask 2]
-  # Random tests
-  1 ; copy attic/manual/mate-with-knight.in
-  1 ; copy attic/manual/wrong-mate-with-knight.in
+  # Manual test cases
+  1 ; copy attic/manual/mate-knights-only-1.in
+  1 ; copy attic/manual/mate-knights-only-2.in
+  1 ; copy attic/manual/not-mate-knights-only-1.in
+  1 ; copy attic/manual/not-mate-knights-only-2.in
+  1 ; copy attic/manual/not-mate-knights-only-3.in
+  1 ; copy attic/manual/not-mate-knights-only-4.in
+  2 ; copy attic/manual/mate-blocked-king.in
+  2 ; copy attic/manual/not-mate-blocked-king.in
 
 
 [Subtask 3]
   # Random tests
-  1 ; random.java 10 20 30
-  1 ; random.java 20 30 40
+  #1 ; random.java 10 20 30
+  #1 ; random.java 20 30 40
 
   # More random tests
-  2 ; random.py 1 1000
+  #2 ; random.py 1 1000
 
