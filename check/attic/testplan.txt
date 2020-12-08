@@ -32,9 +32,8 @@
 
 
 [Subtask 3]
-  # Random tests
-  #1 ; random.java 10 20 30
-  #1 ; random.java 20 30 40
+  # Manual test cases
+  1 ; copy attic/manual/pawn-cannot-move-diagonally.in
 
   # More random tests
   #2 ; random.py 1 1000

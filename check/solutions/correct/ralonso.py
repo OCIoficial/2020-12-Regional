@@ -222,7 +222,7 @@ def get_moves_for_white_piece(board: Board, y: int, x: int, piece: Piece) -> Gen
                 continue
 
             captured = board[ty][tx]
-            if captured and captured[0] is Color.WHITE:
+            if not captured or captured[0] is Color.WHITE:
                 continue
             move(board, y, x, ty, tx)
             yield board
