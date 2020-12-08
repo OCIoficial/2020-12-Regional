@@ -10,16 +10,14 @@ using namespace std;
 #define WHITE_SQUARE "\033[30;47m"
 #define RESET "\033[0m"
 
-#define COLOR 0x18
-#define PIECE 0x07
-#define GET_COLOR(a) (a & COLOR)
-#define GET_PIECE(a) (a & PIECE)
+#define GET_COLOR(item) (item & 0x18)
+#define GET_PIECE(item) (item & 0x07)
 
 typedef array<int, 8> Rank;
 typedef array<Rank, 8> Board;
 
-enum Color{ white = 16, black = 24 };
-enum Piece{ rook, bishop, queen, king, knight, pawn };
+enum Color { white = 16, black = 24 };
+enum Piece { rook, bishop, queen, king, knight, pawn };
 
 const int ROOK_DIRECTIONS[][2] = {
     {+1, +0}, {+0, +1},
@@ -64,7 +62,7 @@ void debug_board(Board board) {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             bool is_white_square = i % 2 == j % 2;
-            fprintf(stderr, "%s", is_white_square ? WHITE_SQUARE : BLACK_SQUARE);
+            fprintf(stderr, is_white_square ? WHITE_SQUARE : BLACK_SQUARE);
             switch (board[i][j]) {
                 case 0: fprintf(stderr, " "); break;
                 case white | rook: fprintf(stderr, is_white_square ? "♖" : "♜"); break;
@@ -109,10 +107,10 @@ bool is_white_king_in_check(Board board) {
         if (board[ky][kx] == (white | king)) break;
     }
 
-    #ifdef DEBUG
-    fprintf(stderr, "Checking if K%c%d is in mate...\n", 'h' - ky, kx + 1);
-    debug_board(board);
-    #endif
+//     #ifdef DEBUG
+//     fprintf(stderr, "Checking if K%c%d is in mate...\n", 'h' - ky, kx + 1);
+//     debug_board(board);
+//     #endif
 
     for (auto direction: ROOK_DIRECTIONS) {
         int dy = direction[0], dx = direction[1];
@@ -160,7 +158,7 @@ bool is_white_king_in_check(Board board) {
 
 
 /**
-    Returns whether the white king is in check if the given move is made.
+    Returns whether the white king is in check if the move (y, x) -> (ty, tx) is made.
 */
 bool is_next_move_white_king_in_check(Board board, int y, int x, int ty, int tx) {
     int captured = board[ty][tx];
@@ -176,6 +174,9 @@ bool is_next_move_white_king_in_check(Board board, int y, int x, int ty, int tx)
 }
 
 
+/**
+    Returns whether the piece at (y, x) can stop the white king from being in check by moving in the direction given by (my, mx).
+*/
 bool is_move_in_check(Board board, int y, int x, int my, int mx) {
     int ty = y + my;
     int tx = x + mx;
@@ -186,6 +187,9 @@ bool is_move_in_check(Board board, int y, int x, int my, int mx) {
 }
 
 
+/**
+    Returns whether the piece at (y, x) can stop the white king from being in check by moving in the direction given by (dy, dx).
+*/
 bool is_direction_in_check(Board board, int y, int x, int dy, int dx) {
     for (int ty = y + dy, tx = x + dx; ; ty += dy, tx += dx) {
         if (!valid_coordinates(ty, tx)) return true;
@@ -197,27 +201,30 @@ bool is_direction_in_check(Board board, int y, int x, int dy, int dx) {
 }
 
 
-bool is_in_check_for_all_moves(Board board, int y, int x, int piece) {
-    switch (piece) {
+/**
+    Returns whether the piece at (y, x) can stop the white king from being in check.
+*/
+bool can_avoid_check(Board board, int y, int x) {
+    switch (GET_PIECE(board[y][x])) {
         case rook:
         case queen:
             for (auto direction: ROOK_DIRECTIONS) {
-                if (!is_direction_in_check(board, y, x, direction[0], direction[1])) return false;
+                if (!is_direction_in_check(board, y, x, direction[0], direction[1])) return true;
             }
-            if (piece == rook) break;
+            if (GET_PIECE(board[y][x]) == rook) break;
         case bishop:
             for (auto direction: BISHOP_DIRECTIONS) {
-                if (!is_direction_in_check(board, y, x, direction[0], direction[1])) return false;
+                if (!is_direction_in_check(board, y, x, direction[0], direction[1])) return true;
             }
             break;
         case knight:
             for (auto move: KNIGHT_MOVES) {
-                if (!is_move_in_check(board, y, x, move[0], move[1])) return false;
+                if (!is_move_in_check(board, y, x, move[0], move[1])) return true;
             }
             break;
         case king:
             for (auto move: KING_MOVES) {
-                if (!is_move_in_check(board, y, x, move[0], move[1])) return false;
+                if (!is_move_in_check(board, y, x, move[0], move[1])) return true;
             }
             break;
         case pawn:
@@ -225,18 +232,18 @@ bool is_in_check_for_all_moves(Board board, int y, int x, int piece) {
                 int ty = y + move[0];
                 int tx = x + move[1];
                 if (valid_coordinates(ty, tx) && !board[ty][tx]) continue;
-                if (!is_move_in_check(board, y, x, move[0], move[1])) return false;
+                if (!is_move_in_check(board, y, x, move[0], move[1])) return true;
             }
             for (auto move: PAWN_MOVES) {
                 int ty = y + move[0];
                 int tx = x + move[1];
                 if (valid_coordinates(ty, tx) && board[ty][tx]) continue;
-                if (!is_move_in_check(board, y, x, move[0], move[1])) return false;
+                if (!is_move_in_check(board, y, x, move[0], move[1])) return true;
             }
             break;
     }
 
-    return true;
+    return false;
 }
 
 
@@ -258,7 +265,7 @@ bool is_checkmate_over_white(vector< vector< int > > pieces) {
     for (auto props: pieces) {
         if (GET_COLOR(board[props[2]][props[3]]) == black) continue;
 
-        if (!is_in_check_for_all_moves(board, props[2], props[3], props[1])) return false;
+        if (can_avoid_check(board, props[2], props[3])) return false;
     }
 
     return true;
