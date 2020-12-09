@@ -149,7 +149,7 @@ int main() {
         board[Y][X] = make_pair(C, P);
     }
     ensuref(countPiece(board, white, king) == 1, "Debe haber exactamente un rey blanco.");
-    ensuref(countPiece(board, white, king) == 1, "Debe haber exactamente un rey negro.");
+    ensuref(countPiece(board, black, king) == 1, "Debe haber exactamente un rey negro.");
     ensuref(
         max(0, countPiece(board, white, queen) - 1) +
         max(0, countPiece(board, white, rook) - 2) +
