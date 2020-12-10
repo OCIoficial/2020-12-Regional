@@ -12,29 +12,34 @@
 # To generate test cases using test plan use `ocimatic gen-input`
 
 
-[Subtask 1]
+[Subtask 1 - validators/st1.cpp]
+  # Manual test cases
+  1 ; copy attic/manual/st1/mate-knights-only-1.in
+  1 ; copy attic/manual/st1/mate-knights-only-2.in
+  1 ; copy attic/manual/st1/mate-queens-only-1.in
+  1 ; copy attic/manual/st1/mate-queens-only-2.in
+  1 ; copy attic/manual/st1/not-mate-knights-only-1.in
+  1 ; copy attic/manual/st1/not-mate-knights-only-2.in
+  1 ; copy attic/manual/st1/not-mate-knights-only-3.in
+  1 ; copy attic/manual/st1/not-mate-knights-only-4.in
+
   # Use sample data as test
-  # TODO ensure they match the subtask difficulty
-  1 ; copy statement/sample-1.in
-  1 ; copy statement/sample-2.in
+  2 ; copy statement/sample-1.in
 
 
-[Subtask 2]
+[Subtask 2 - validators/st2.cpp]
   # Manual test cases
-  1 ; copy attic/manual/mate-knights-only-1.in
-  1 ; copy attic/manual/mate-knights-only-2.in
-  1 ; copy attic/manual/not-mate-knights-only-1.in
-  1 ; copy attic/manual/not-mate-knights-only-2.in
-  1 ; copy attic/manual/not-mate-knights-only-3.in
-  1 ; copy attic/manual/not-mate-knights-only-4.in
-  2 ; copy attic/manual/mate-blocked-king.in
-  2 ; copy attic/manual/not-mate-blocked-king.in
+  1 ; copy attic/manual/st2/mate-blocked-king.in
+  1 ; copy attic/manual/st2/not-mate-blocked-king.in
 
 
-[Subtask 3]
+[Subtask 3 - validators/st3.cpp]
   # Manual test cases
-  1 ; copy attic/manual/pawn-cannot-move-diagonally.in
+  1 ; copy attic/manual/st3/pawn-cannot-move-diagonally.in
+
+  # Use sample data as test
+  2 ; copy statement/sample-2.in
 
   # More random tests
-  #2 ; random.py 1 1000
+  #3 ; random.py 1 1000
 
