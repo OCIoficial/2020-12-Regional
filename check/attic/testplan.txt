@@ -26,11 +26,66 @@
   # Use sample data as test
   2 ; copy statement/sample-1.in
 
+  # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
+  3 ; generator.py 1 2 0 2 1
+  3 ; generator.py 1 2 0 2 1
+  3 ; generator.py 1 2 0 3 1
+  3 ; generator.py 1 2 0 2 1
+  3 ; generator.py 1 2 0 4 1
+  3 ; generator.py 1 4 0 4 1
+  3 ; generator.py 1 3 0 3 1
+  3 ; generator.py 1 3 0 2 1
+  3 ; generator.py 1 2 0 2 0
+  3 ; generator.py 1 2 0 2 0
+  3 ; generator.py 1 2 0 3 0
+  3 ; generator.py 1 2 0 2 0
+  3 ; generator.py 1 2 0 4 0
+  3 ; generator.py 1 4 0 4 0
+  3 ; generator.py 1 3 0 3 0
+  3 ; generator.py 1 3 0 2 0
+
 
 [Subtask 2 - validators/st2.cpp]
   # Manual test cases
   1 ; copy attic/manual/st2/mate-blocked-king.in
   1 ; copy attic/manual/st2/not-mate-blocked-king.in
+
+  # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
+  2 ; generator.py 2 2 0 2 1
+  2 ; generator.py 2 2 1 2 1
+  2 ; generator.py 2 2 2 0 1
+  2 ; generator.py 2 2 0 3 1
+  2 ; generator.py 2 2 1 3 1
+  2 ; generator.py 2 2 2 0 1
+  2 ; generator.py 2 2 0 2 1
+  2 ; generator.py 2 2 1 2 1
+  2 ; generator.py 2 2 2 0 1
+  2 ; generator.py 2 2 0 4 1
+  2 ; generator.py 2 2 1 4 1
+  2 ; generator.py 2 2 2 0 1
+  2 ; generator.py 2 4 0 0 1
+  2 ; generator.py 2 3 0 3 1
+  2 ; generator.py 2 3 3 3 1
+  2 ; generator.py 2 3 0 0 1
+  2 ; generator.py 2 3 3 0 1
+
+  2 ; generator.py 2 2 0 2 0
+  2 ; generator.py 2 2 1 2 0
+  2 ; generator.py 2 2 2 0 0
+  2 ; generator.py 2 2 0 3 0
+  2 ; generator.py 2 2 1 3 0
+  2 ; generator.py 2 2 2 0 0
+  2 ; generator.py 2 2 0 2 0
+  2 ; generator.py 2 2 1 2 0
+  2 ; generator.py 2 2 2 0 0
+  2 ; generator.py 2 2 0 4 0
+  2 ; generator.py 2 2 1 4 0
+  2 ; generator.py 2 2 2 0 0
+  2 ; generator.py 2 4 0 0 0
+  2 ; generator.py 2 3 0 3 0
+  2 ; generator.py 2 3 3 3 0
+  2 ; generator.py 2 3 0 0 0
+  2 ; generator.py 2 3 3 0 0
 
 
 [Subtask 3 - validators/st3.cpp]

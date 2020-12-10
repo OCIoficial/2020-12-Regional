@@ -63,10 +63,8 @@ def amenazaAlRey(pieza, tablero, source, target):
     ataca = False
     for i in [-1, 0, 1]:
         for j in [-1, 0, 1]:
-            if i == 0 and j == 0:
-                continue
-            ataca |= pieza.revisarAtaque(tablero, source, (target[0] + i, target[0] \
-                + j))
+            newTarget = (target[0] + i, target[1] + j)
+            ataca |= pieza.revisarAtaque(tablero, source, newTarget)
     return ataca
 
 """
@@ -103,22 +101,22 @@ class Torre(Pieza):
         opciones = []
         # Hacia arriba
         for i in range(targetY - 1, -1, -1):
-            if tablero[i][targetX] is not Tipo.VACIA:
+            if tablero[i][targetX].tipo is not Tipo.VACIA:
                 break
             opciones.append((i, targetX))
         # Hacia abajo
         for i in range(targetY + 1, 8):
-            if tablero[i][targetX] is not Tipo.VACIA:
+            if tablero[i][targetX].tipo is not Tipo.VACIA:
                 break
             opciones.append((i, targetX))
         # Hacia la izquierda
         for i in range(targetX - 1, -1, -1):
-            if tablero[targetY][i] is not Tipo.VACIA:
+            if tablero[targetY][i].tipo is not Tipo.VACIA:
                 break
             opciones.append((targetY, i))
         # Hacia la derecha
         for i in range(targetX + 1, 8):
-            if tablero[targetY][i] is not Tipo.VACIA:
+            if tablero[targetY][i].tipo is not Tipo.VACIA:
                 break
             opciones.append((targetY, i))
         return opciones
@@ -130,9 +128,10 @@ class Torre(Pieza):
         opciones = Torre.posiblesAtaques(tablero, target)
         opciones = eliminarAledanas(opciones, target)
         if not opciones:
-            return
+            return False
         posicion = random.choice(opciones)
         tablero[posicion[0]][posicion[1]] = Torre(Color.NEGRA)
+        return True
 
     """
     Returns True si `source` puede atacar a `target`
@@ -157,7 +156,8 @@ class Torre(Pieza):
         for i in range(INTENTOS * 2):
             x = random.randint(0, 7)
             y = random.randint(0, 7)
-            if not amenazaAlRey(Torre, tablero, (y, x), rey):
+            if tablero[y][x].tipo is Tipo.VACIA and \
+                    not amenazaAlRey(Torre, tablero, (y, x), rey):
                 tablero[y][x] = Torre(color)
                 break
 
@@ -169,33 +169,33 @@ class Torre(Pieza):
         (y, x) = target
         # Hacia arriba
         for i in range(y - 1, -1, -1):
-            if tablero[i][x] is Tipo.VACIA:
+            if tablero[i][x].tipo is Tipo.VACIA:
                 continue
-            elif tablero[i][x] is tipo:
+            elif tablero[i][x].tipo is tipo:
                 return True
             else:
                 break
         # Hacia abajo
         for i in range(y + 1, 8):
-            if tablero[i][x] is Tipo.VACIA:
+            if tablero[i][x].tipo is Tipo.VACIA:
                 continue
-            elif tablero[i][x] is tipo:
+            elif tablero[i][x].tipo is tipo:
                 return True
             else:
                 break
         # Hacia la izquierda
         for i in range(x - 1, -1, -1):
-            if tablero[i][x] is Tipo.VACIA:
+            if tablero[i][x].tipo is Tipo.VACIA:
                 continue
-            elif tablero[i][x] is tipo:
+            elif tablero[i][x].tipo is tipo:
                 return True
             else:
                 break
         # Hacia la derecha
         for i in range(x + 1, 8):
-            if tablero[i][x] is Tipo.VACIA:
+            if tablero[i][x].tipo is Tipo.VACIA:
                 continue
-            elif tablero[i][x] is tipo:
+            elif tablero[i][x].tipo is tipo:
                 return True
             else:
                 break
@@ -219,7 +219,7 @@ class Alfil(Pieza):
             if valid[0]:
                 if 0 > targetY - i or 8 <= targetX + i:
                     valid[0] = False
-                elif tablero[targetY - i][targetX + i] is not Tipo.VACIA:
+                elif tablero[targetY - i][targetX + i].tipo is not Tipo.VACIA:
                     valid[0] = False
                 else:
                     opciones.append((targetY - i, targetX + i))
@@ -227,7 +227,7 @@ class Alfil(Pieza):
             if valid[1]:
                 if 0 > targetY - i or 0 > targetX - i:
                     valid[1] = False
-                elif tablero[targetY - i][targetX - i] is not Tipo.VACIA:
+                elif tablero[targetY - i][targetX - i].tipo is not Tipo.VACIA:
                     valid[1] = False
                 else:
                     opciones.append((targetY - i, targetX - i))
@@ -235,7 +235,7 @@ class Alfil(Pieza):
             if valid[2]:
                 if 8 <= targetY + i or 0 > targetX - i:
                     valid[2] = False
-                elif tablero[targetY + i][targetX - i] is not Tipo.VACIA:
+                elif tablero[targetY + i][targetX - i].tipo is not Tipo.VACIA:
                     valid[2] = False
                 else:
                     opciones.append((targetY + i, targetX - i))
@@ -243,7 +243,7 @@ class Alfil(Pieza):
             if valid[3]:
                 if 8 <= targetY + i or 8 <= targetX + i:
                     valid[3] = False
-                elif tablero[targetY + i][targetX + i] is not Tipo.VACIA:
+                elif tablero[targetY + i][targetX + i].tipo is not Tipo.VACIA:
                     valid[3] = False
                 else:
                     opciones.append((targetY + i, targetX + i))
@@ -256,9 +256,10 @@ class Alfil(Pieza):
         opciones = Alfil.posiblesAtaques(tablero, target)
         opciones = eliminarAledanas(opciones, target)
         if not opciones:
-            return
+            return False
         (y, x) = random.choice(opciones)
         tablero[y][x] = Alfil(Color.NEGRA)
+        return True
 
     """
     Returns True si `source` puede atacar a `target`
@@ -283,7 +284,8 @@ class Alfil(Pieza):
         for i in range(INTENTOS * 2):
             x = random.randint(0, 7)
             y = random.randint(0, 7)
-            if not amenazaAlRey(Alfil, tablero, (y, x), rey):
+            if tablero[y][x].tipo is Tipo.VACIA and \
+                    not amenazaAlRey(Alfil, tablero, (y, x), rey):
                 tablero[y][x] = Alfil(color)
                 break
 
@@ -299,9 +301,9 @@ class Alfil(Pieza):
             if valid[0]:
                 if 0 > y - i or 8 <= x + i:
                     valid[0] = False
-                elif tablero[y - i][x + i] is Tipo.VACIA:
+                elif tablero[y - i][x + i].tipo is Tipo.VACIA:
                     None # Do nothing
-                elif tablero[y - i][x + i] is tipo:
+                elif tablero[y - i][x + i].tipo is tipo:
                     return True
                 else:
                     valid[0] = False
@@ -309,9 +311,9 @@ class Alfil(Pieza):
             if valid[1]:
                 if 0 > y - i or 0 > x - i:
                     valid[1] = False
-                elif tablero[y - i][x - i] is Tipo.VACIA:
+                elif tablero[y - i][x - i].tipo is Tipo.VACIA:
                     None # Do nothing
-                elif tablero[y - i][x - i] is tipo:
+                elif tablero[y - i][x - i].tipo is tipo:
                     return True
                 else:
                     valid[1] = False
@@ -319,9 +321,9 @@ class Alfil(Pieza):
             if valid[2]:
                 if 8 <= y + i or 0 > x - i:
                     valid[2] = False
-                elif tablero[y + i][x - i] is Tipo.VACIA:
+                elif tablero[y + i][x - i].tipo is Tipo.VACIA:
                     None # Do nothing
-                elif tablero[y + i][x - i] is tipo:
+                elif tablero[y + i][x - i].tipo is tipo:
                     return True
                 else:
                     valid[2] = False
@@ -329,9 +331,9 @@ class Alfil(Pieza):
             if valid[3]:
                 if 8 <= y + i or 8 <= x + i:
                     valid[3] = False
-                elif tablero[y + i][x + i] is Tipo.VACIA:
+                elif tablero[y + i][x + i].tipo is Tipo.VACIA:
                     None # Do nothing
-                elif tablero[y + i][x + i] is tipo:
+                elif tablero[y + i][x + i].tipo is tipo:
                     return True
                 else:
                     valid[3] = False
@@ -354,9 +356,10 @@ class Reina(Pieza):
         opciones = Reina.posiblesAtaques(tablero, target)
         opciones = eliminarAledanas(opciones, target)
         if not opciones:
-            return
+            return False
         (y, x) = random.choice(opciones)
         tablero[y][x] = Reina(Color.NEGRA)
+        return True
 
     """
     Returns True si `source` puede atacar a `target`
@@ -381,7 +384,8 @@ class Reina(Pieza):
         for i in range(INTENTOS * 2):
             x = random.randint(0, 7)
             y = random.randint(0, 7)
-            if not amenazaAlRey(Reina, tablero, (y, x), rey):
+            if tablero[y][x].tipo is Tipo.VACIA and \
+                    not amenazaAlRey(Reina, tablero, (y, x), rey):
                 tablero[y][x] = Reina(color)
                 break
 
@@ -407,34 +411,34 @@ class Caballo(Pieza):
         # revisar las 8 opciones manualmente :(
         if 0 <= y - 2:
             if 0 <= x - 1:
-                if tablero[y - 2][x - 1] is Tipo.VACIA:
+                if tablero[y - 2][x - 1].tipo is Tipo.VACIA:
                     opciones.append((y - 2, x - 1))
             if 8 > x + 1:
-                if tablero[y - 2][x + 1] is Tipo.VACIA:
+                if tablero[y - 2][x + 1].tipo is Tipo.VACIA:
                     opciones.append((y - 2, x + 1))
 
         if 8 > y + 2:
             if 0 <= x - 1:
-                if tablero[y + 2][x - 1] is Tipo.VACIA:
+                if tablero[y + 2][x - 1].tipo is Tipo.VACIA:
                     opciones.append((y + 2, x - 1))
             if 8 > x + 1:
-                if tablero[y + 2][x + 1] is Tipo.VACIA:
+                if tablero[y + 2][x + 1].tipo is Tipo.VACIA:
                     opciones.append((y + 2, x + 1))
 
         if 0 <= x - 2:
             if 0 <= y - 1:
-                if tablero[y - 1][x - 2] is Tipo.VACIA:
+                if tablero[y - 1][x - 2].tipo is Tipo.VACIA:
                     opciones.append((y - 1, x - 2))
             if 8 > y + 1:
-                if tablero[y + 1][x - 2] is Tipo.VACIA:
+                if tablero[y + 1][x - 2].tipo is Tipo.VACIA:
                     opciones.append((y + 1, x - 2))
 
         if 8 > x + 2:
             if 0 <= y - 1:
-                if tablero[y - 1][x + 2] is Tipo.VACIA:
+                if tablero[y - 1][x + 2].tipo is Tipo.VACIA:
                     opciones.append((y - 1, x + 2))
             if 8 > y + 1:
-                if tablero[y + 1][x + 2] is Tipo.VACIA:
+                if tablero[y + 1][x + 2].tipo is Tipo.VACIA:
                     opciones.append((y + 1, x + 2))
 
         return opciones
@@ -444,9 +448,10 @@ class Caballo(Pieza):
         opciones = Caballo.posiblesAtaques(tablero, target) 
         opciones = eliminarAledanas(opciones, target)
         if not opciones:
-            return
+            return False
         (y, x) = random.choice(opciones)
         tablero[y][x] = Caballo(Color.NEGRA)
+        return True
 
     """
     Returns True si `source` puede atacar a `target`
@@ -471,7 +476,8 @@ class Caballo(Pieza):
         for i in range(INTENTOS * 2):
             x = random.randint(0, 7)
             y = random.randint(0, 7)
-            if not amenazaAlRey(Caballo, tablero, (y, x), rey):
+            if tablero[y][x].tipo is Tipo.VACIA and \
+                    not amenazaAlRey(Caballo, tablero, (y, x), rey):
                 tablero[y][x] = Caballo(color)
                 break
 
@@ -498,20 +504,20 @@ class Peon(Pieza):
         (y, x) = target
         if y - 1 >= 0:
             if x - 1 >= 0:
-                if tablero[y - 1][x - 1] is Tipo.VACIA:
+                if tablero[y - 1][x - 1].tipo is Tipo.VACIA:
                     opciones.append((y - 1, x - 1))
             if x + 1 < 8:
-                if tablero[y - 1][x + 1] is Tipo.VACIA:
+                if tablero[y - 1][x + 1].tipo is Tipo.VACIA:
                     opciones.append((y - 1, x + 1))
         return opciones
 
     def posicionarAtaque(tablero, target):
         opciones = Peon.posiblesAtaques(tablero, target) 
-        opciones = eliminarAledanas(opciones, target)
         if not opciones:
-            return
+            return False
         (y, x) = random.choice(opciones)
         tablero[y][x] = Peon(Color.NEGRA)
+        return True
 
     """
     Returns True si `source` puede atacar a `target`
@@ -536,7 +542,8 @@ class Peon(Pieza):
         for i in range(INTENTOS * 2):
             x = random.randint(0, 7)
             y = random.randint(0, 7)
-            if not amenazaAlRey(Peon, tablero, (y, x), rey):
+            if tablero[y][x].tipo is Tipo.VACIA and \
+                    not amenazaAlRey(Peon, tablero, (y, x), rey):
                 tablero[y][x] = Peon(color)
                 break
 
@@ -547,7 +554,7 @@ class Peon(Pieza):
         (y, x) = target
         opciones = Peon.posiblesAtaques(tablero, (y, x))
         for opcion in opciones:
-            if tablero[opcion[0]][opcion[1]] is tipo:
+            if tablero[opcion[0]][opcion[1]].tipo is tipo:
                 return True
         return False
 
@@ -575,8 +582,8 @@ class Rey(Pieza):
                     continue
                 if y + i < 0 or 8 <= y + i or x + j < 0 or x + j >= 8:
                     continue
-                if tablero[y + i][x + j] is Tipo.VACIA:
-                    opciones.append((y + i, x + j))
+                # if tablero[y + i][x + j] is Tipo.VACIA:
+                opciones.append((y + i, x + j))
         return opciones
 
     """
@@ -586,7 +593,7 @@ class Rey(Pieza):
         (y, x) = target
         if x < 0 or 8 <= x or y < 0 or 8 <= y:
             return False
-        opciones = posiblesAtaques(target)
+        opciones = Rey.posiblesAtaques(tablero, target)
         return source in opciones
 
     """
@@ -596,12 +603,13 @@ class Rey(Pieza):
     """
     def posicionarExtra(tablero, color):
         assert(color is Color.NEGRA)
-        rey = encontrarReyNegro(tablero)
+        rey = encontrarReyBlanco(tablero)
 
         for i in range(INTENTOS * 2):
             x = random.randint(0, 7)
             y = random.randint(0, 7)
-            if not amenazaAlRey(Rey, tablero, (y, x), rey):
+            if tablero[y][x].tipo is Tipo.VACIA and \
+                    not amenazaAlRey(Rey, tablero, (y, x), rey):
                 tablero[y][x] = Rey(color)
                 break
 
@@ -612,7 +620,7 @@ class Rey(Pieza):
         (y, x) = target
         opciones = Rey.posiblesAtaques(tablero, (y, x))
         for opcion in opciones:
-            if tablero[opcion[0]][opcion[1]] is tipo:
+            if tablero[opcion[0]][opcion[1]].tipo is tipo:
                 return True
         return False
 
@@ -662,11 +670,8 @@ tablero = [[Pieza(Tipo.VACIA, Color.NEGRA) for _ in range(8)] for _ in range(8)]
 Rey.ponerRandom(tablero, Color.BLANCA)
 reyBlanco = encontrarReyBlanco(tablero)
 
-if random.choice([True, False]):
-    # Random para poner un rey negro. Esto tiene que ser antes de empezar a
-    # poner piezas para que el rey negro no esté en jaque
-    Rey.posicionarExtra(tablero, Color.NEGRA)
-    reyNegro = encontrarReyNegro(tablero)
+Rey.posicionarExtra(tablero, Color.NEGRA)
+reyNegro = encontrarReyNegro(tablero)
 
 opcionesBlanco = [Torre] * 2 +  [Alfil] * 2 + [Reina] + [Caballo] * 2 + \
         [Peon] * 8
@@ -701,9 +706,9 @@ if caso == 1 or caso == 3:
         for _ in range(INTENTOS):
             pieza = random.choice(opcionesFlat)
             if pieza in opcionesNegro:
-                opcionesNegro.remove(pieza)
-                pieza.posicionarAtaque(tablero, reyBlanco)
-                break
+                if pieza.posicionarAtaque(tablero, reyBlanco):
+                    opcionesNegro.remove(pieza)
+                    break
 
     # Cubrir toda el area al rededor del rey
     if mate == 1:
@@ -721,9 +726,9 @@ if caso == 1 or caso == 3:
                     for _ in range(INTENTOS):
                         pieza = random.choice(opcionesFlat)
                         if pieza in opcionesNegro:
-                            opcionesNegro.remove(pieza)
-                            pieza.posicionarAtaque(tablero, target)
-                            break
+                            if pieza.posicionarAtaque(tablero, target):
+                                opcionesNegro.remove(pieza)
+                                break
 
 if caso == 2:
     opcionesNegro = [Peon] * 8 + [Caballo] * 2
@@ -748,9 +753,9 @@ if caso == 2:
         for _ in range(INTENTOS):
             pieza = random.choice(opcionesFlatNegro)
             if pieza in opcionesNegro:
-                opcionesNegro.remove(pieza)
-                pieza.posicionarAtaque(tablero, reyBlanco)
-                break
+                if pieza.posicionarAtaque(tablero, reyBlanco):
+                    opcionesNegro.remove(pieza)
+                    break
 
     # Cubrir toda el area al rededor del rey
     if mate == 1:
@@ -768,9 +773,9 @@ if caso == 2:
                     for _ in range(INTENTOS):
                         pieza = random.choice(opcionesFlatNegro)
                         if pieza in opcionesNegro:
-                            opcionesNegro.remove(pieza)
-                            pieza.posicionarAtaque(tablero, target)
-                            break
+                            if pieza.posicionarAtaque(tablero, target):
+                                opcionesNegro.remove(pieza)
+                                break
 
 print(contarPiezas(tablero))
 printInput(tablero)
