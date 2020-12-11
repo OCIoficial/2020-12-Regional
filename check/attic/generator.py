@@ -21,6 +21,9 @@ class Color(Enum):
     BLANCA = 0
     NEGRA  = 1
 
+    def otro(self):
+        return Color(0) if self.value == 1 else Color(1)
+
 def encontrarReyBlanco(tablero):
     for i in range(8):
         for j in range(8):
@@ -48,23 +51,23 @@ def todasVacias(tablero):
 Revisa si la casilla está siendo atacada. returns True si hay un ataque en la
 casilla
 """
-def casillaAtacada(tablero, target):
+def casillaAtacada(tablero, target, color=Color.NEGRA):
     piezas = [Torre, Alfil, Reina, Caballo, Peon, Rey]
     ataques = [pieza.casillaAtacada(tablero, target, pieza) for pieza in piezas]
     return reduce((lambda x, y: x or y), ataques)    
 
 """
-Revisa si la pieza de tipo `pieza` en la posicion `source` amenaza a la pieza en
-posicion `target` o las casillas de al rededor
+Revisa si la pieza de tipo `pieza` y color `color` en la posicion `source`
+amenaza a la pieza en posicion `target` o las casillas de al rededor
 """
-def amenazaAlRey(pieza, tablero, source, target):
+def amenazaAlRey(pieza, tablero, source, target, color=Color.NEGRA):
     if target is None:
         return False
     ataca = False
     for i in [-1, 0, 1]:
         for j in [-1, 0, 1]:
             newTarget = (target[0] + i, target[1] + j)
-            ataca |= pieza.revisarAtaque(tablero, source, newTarget)
+            ataca |= pieza.revisarAtaque(tablero, source, newTarget, color)
     return ataca
 
 """
@@ -96,7 +99,7 @@ class Torre(Pieza):
     Encuentra vertical y horizontalmente las posibles opciones para posicionar
     una torre atacando a la casilla target
     """
-    def posiblesAtaques(tablero, target):
+    def posiblesAtaques(tablero, target, color=None):
         (targetY, targetX) = target
         opciones = []
         # Hacia arriba
@@ -124,7 +127,7 @@ class Torre(Pieza):
     """
     Posicionar una torre negra atacando a la casilla target.
     """
-    def posicionarAtaque(tablero, target):
+    def posicionarAtaque(tablero, target, color=None):
         opciones = Torre.posiblesAtaques(tablero, target)
         opciones = eliminarAledanas(opciones, target)
         if not opciones:
@@ -136,7 +139,7 @@ class Torre(Pieza):
     """
     Returns True si `source` puede atacar a `target`
     """
-    def revisarAtaque(tablero, source, target):
+    def revisarAtaque(tablero, source, target, color=None):
         (y, x) = target
         if x < 0 or 8 <= x or y < 0 or 8 <= y:
             return False
@@ -165,7 +168,7 @@ class Torre(Pieza):
     Returns True si hay una torre atacando la casilla indicada.
     Tipo tiene que ser o Torre o Reina
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.TORRE):
+    def casillaAtacada(tablero, target, tipo=Tipo.TORRE, color=None):
         (y, x) = target
         # Hacia arriba
         for i in range(y - 1, -1, -1):
@@ -210,7 +213,7 @@ class Alfil(Pieza):
     """
     Encuentra los posibles ataques en las diagonales para la casilla target
     """
-    def posiblesAtaques(tablero, target):
+    def posiblesAtaques(tablero, target, color=None):
         (targetY, targetX) = target
         opciones = []
         valid = [True, True, True, True]
@@ -252,7 +255,7 @@ class Alfil(Pieza):
     """
     Posicionar un alfil negro atacando a la posicion target
     """
-    def posicionarAtaque(tablero, target):
+    def posicionarAtaque(tablero, target, color=None):
         opciones = Alfil.posiblesAtaques(tablero, target)
         opciones = eliminarAledanas(opciones, target)
         if not opciones:
@@ -264,7 +267,7 @@ class Alfil(Pieza):
     """
     Returns True si `source` puede atacar a `target`
     """
-    def revisarAtaque(tablero, source, target):
+    def revisarAtaque(tablero, source, target, color=None):
         (y, x) = target
         if x < 0 or 8 <= x or y < 0 or 8 <= y:
             return False
@@ -293,7 +296,7 @@ class Alfil(Pieza):
     Returns True si hay un alfil atacando la casilla indicada.
     Tipo tiene que ser o Alfil o Reina
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.ALFIL):
+    def casillaAtacada(tablero, target, tipo=Tipo.ALFIL, color=None):
         (y, x) = target
         valid = [True, True, True, True]
         for i in range(8):
@@ -343,7 +346,7 @@ class Reina(Pieza):
     def __init__(self, color):
         Pieza.__init__(self, Tipo.REINA, color)
 
-    def posiblesAtaques(tablero, target):
+    def posiblesAtaques(tablero, target, color=None):
         return Torre.posiblesAtaques(tablero, target) + \
             Alfil.posiblesAtaques(tablero, target)
 
@@ -352,7 +355,7 @@ class Reina(Pieza):
     Combina las opciones de la torre y el alfil y elige una posicion al azar
     dentro de esas opciones.
     """
-    def posicionarAtaque(tablero, target):
+    def posicionarAtaque(tablero, target, color=None):
         opciones = Reina.posiblesAtaques(tablero, target)
         opciones = eliminarAledanas(opciones, target)
         if not opciones:
@@ -364,7 +367,7 @@ class Reina(Pieza):
     """
     Returns True si `source` puede atacar a `target`
     """
-    def revisarAtaque(tablero, source, target):
+    def revisarAtaque(tablero, source, target, color=None):
         (y, x) = target
         if x < 0 or 8 <= x or y < 0 or 8 <= y:
             return False
@@ -392,7 +395,7 @@ class Reina(Pieza):
     """
     Returns True si hay un alfil atacando la casilla indicada.
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.REINA):
+    def casillaAtacada(tablero, target, tipo=Tipo.REINA, color=None):
         (y, x) = target
         return Torre.casillaAtacada(tablero, (y, x), tipo) or \
                 Alfil.casillaAtacada(tablero, (y, x), tipo)
@@ -404,7 +407,7 @@ class Caballo(Pieza):
     """
     Encuentra los posibles ataques para la casilla target
     """
-    def posiblesAtaques(tablero, target):
+    def posiblesAtaques(tablero, target, color=None):
         opciones = []
         (y, x) = target
 
@@ -444,7 +447,7 @@ class Caballo(Pieza):
         return opciones
 
 
-    def posicionarAtaque(tablero, target):
+    def posicionarAtaque(tablero, target, color=None):
         opciones = Caballo.posiblesAtaques(tablero, target) 
         opciones = eliminarAledanas(opciones, target)
         if not opciones:
@@ -456,7 +459,7 @@ class Caballo(Pieza):
     """
     Returns True si `source` puede atacar a `target`
     """
-    def revisarAtaque(tablero, source, target):
+    def revisarAtaque(tablero, source, target, color=None):
         (y, x) = target
         if x < 0 or 8 <= x or y < 0 or 8 <= y:
             return False
@@ -484,7 +487,7 @@ class Caballo(Pieza):
     """
     Returns True si hay un Caballo atacando la casilla indicada.
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.CABALLO):
+    def casillaAtacada(tablero, target, tipo=Tipo.CABALLO, color=None):
         (y, x) = target
         opciones = Caballo.posiblesAtaques(tablero, (y, x))
         for opcion in opciones:
@@ -497,22 +500,33 @@ class Peon(Pieza):
         Pieza.__init__(self, Tipo.PEON, color)
 
     """
-    Encuentra los posibles ataques para la casilla target
+    Encuentra los posibles ataques para la casilla target.
+    target es de color 'color', siendo atacada por una
+    pieza de color `color.otro()`
     """
-    def posiblesAtaques(tablero, target):
+    def posiblesAtaques(tablero, target, color):
         opciones = []
         (y, x) = target
-        if y - 1 >= 0:
-            if x - 1 >= 0:
-                if tablero[y - 1][x - 1].tipo is Tipo.VACIA:
-                    opciones.append((y - 1, x - 1))
-            if x + 1 < 8:
-                if tablero[y - 1][x + 1].tipo is Tipo.VACIA:
-                    opciones.append((y - 1, x + 1))
+        if color is Color.BLANCA:
+            if y - 1 >= 0:
+                if x - 1 >= 0:
+                    if tablero[y - 1][x - 1].tipo is Tipo.VACIA:
+                        opciones.append((y - 1, x - 1))
+                if x + 1 < 8:
+                    if tablero[y - 1][x + 1].tipo is Tipo.VACIA:
+                        opciones.append((y - 1, x + 1))
+        else:
+            if y + 1 < 8:
+                if x - 1 >= 0:
+                    if tablero[y + 1][x - 1].tipo is Tipo.VACIA:
+                        opciones.append((y + 1, x - 1))
+                if x + 1 < 8:
+                    if tablero[y + 1][x + 1].tipo is Tipo.VACIA:
+                        opciones.append((y + 1, x + 1))
         return opciones
 
-    def posicionarAtaque(tablero, target):
-        opciones = Peon.posiblesAtaques(tablero, target) 
+    def posicionarAtaque(tablero, target, color):
+        opciones = Peon.posiblesAtaques(tablero, target, color.otro()) 
         if not opciones:
             return False
         (y, x) = random.choice(opciones)
@@ -520,13 +534,13 @@ class Peon(Pieza):
         return True
 
     """
-    Returns True si `source` puede atacar a `target`
+    Returns True si `source` de color `color` puede atacar a `target`
     """
-    def revisarAtaque(tablero, source, target):
-        (y, x) = target
+    def revisarAtaque(tablero, source, target, color):
+        (y, x) = source
         if x < 0 or 8 <= x or y < 0 or 8 <= y:
             return False
-        opciones = Peon.posiblesAtaques(tablero, target)
+        opciones = Peon.posiblesAtaques(tablero, target, color.otro())
         return source in opciones
 
     """
@@ -543,16 +557,16 @@ class Peon(Pieza):
             x = random.randint(0, 7)
             y = random.randint(0, 7)
             if tablero[y][x].tipo is Tipo.VACIA and \
-                    not amenazaAlRey(Peon, tablero, (y, x), rey):
+                    not amenazaAlRey(Peon, tablero, (y, x), rey, color):
                 tablero[y][x] = Peon(color)
                 break
 
     """
     Returns True si hay un Peon atacando la casilla indicada.
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.PEON):
+    def casillaAtacada(tablero, target, tipo=Tipo.PEON, color=Color.NEGRA):
         (y, x) = target
-        opciones = Peon.posiblesAtaques(tablero, (y, x))
+        opciones = Peon.posiblesAtaques(tablero, (y, x), color)
         for opcion in opciones:
             if tablero[opcion[0]][opcion[1]].tipo is tipo:
                 return True
@@ -573,7 +587,7 @@ class Rey(Pieza):
     """
     Encuentra los posibles ataques para la casilla target
     """
-    def posiblesAtaques(tablero, target):
+    def posiblesAtaques(tablero, target, color=None):
         opciones = []
         (y, x) = target
         for i in [-1, 0, 1]:
@@ -589,7 +603,7 @@ class Rey(Pieza):
     """
     Returns True si `source` puede atacar a `target`
     """
-    def revisarAtaque(tablero, source, target):
+    def revisarAtaque(tablero, source, target, color=None):
         (y, x) = target
         if x < 0 or 8 <= x or y < 0 or 8 <= y:
             return False
@@ -616,7 +630,7 @@ class Rey(Pieza):
     """
     Returns True si hay un Rey atacando la casilla indicada.
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.REY):
+    def casillaAtacada(tablero, target, tipo=Tipo.REY, color=None):
         (y, x) = target
         opciones = Rey.posiblesAtaques(tablero, (y, x))
         for opcion in opciones:
@@ -706,7 +720,7 @@ if caso == 1 or caso == 3:
         for _ in range(INTENTOS):
             pieza = random.choice(opcionesFlat)
             if pieza in opcionesNegro:
-                if pieza.posicionarAtaque(tablero, reyBlanco):
+                if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
                     opcionesNegro.remove(pieza)
                     break
 
@@ -721,18 +735,27 @@ if caso == 1 or caso == 3:
                 if target[0] < 0 or target[0] >= 8 or \
                         target[1] < 0 or target[1] >= 8:
                     continue
-                if not casillaAtacada(tablero, target):
+                if not casillaAtacada(tablero, target, Color.NEGRA):
                     # No esta siendo atacada, poner una pieza atacando
                     for _ in range(INTENTOS):
                         pieza = random.choice(opcionesFlat)
                         if pieza in opcionesNegro:
-                            if pieza.posicionarAtaque(tablero, target):
+                            if pieza.posicionarAtaque(tablero, target, Color.NEGRA):
                                 opcionesNegro.remove(pieza)
                                 break
 
 if caso == 2:
     opcionesNegro = [Peon] * 8 + [Caballo] * 2
     opcionesFlatNegro = [Peon, Caballo]
+    # En este caso los ataques de peones o caballos no pueden ser bloqueados
+    # por otras piezas
+    for _ in range(nPiezasAtk):
+        for _ in range(INTENTOS):
+            pieza = random.choice(opcionesFlatNegro)
+            if pieza in opcionesNegro:
+                if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
+                    opcionesNegro.remove(pieza)
+                    break
     for _ in range(nPiezasExtraBlanca):
         for _ in range(INTENTOS):
             pieza = random.choice(opcionesFlat)
@@ -747,15 +770,6 @@ if caso == 2:
                 opcionesNegro.remove(pieza)
                 pieza.posicionarExtra(tablero, Color.NEGRA)
                 break
-    # Ponemos las piezas importantes que atacan al rey al final para que las
-    # otras no bloqueen la linea de ataque. 
-    for _ in range(nPiezasAtk):
-        for _ in range(INTENTOS):
-            pieza = random.choice(opcionesFlatNegro)
-            if pieza in opcionesNegro:
-                if pieza.posicionarAtaque(tablero, reyBlanco):
-                    opcionesNegro.remove(pieza)
-                    break
 
     # Cubrir toda el area al rededor del rey
     if mate == 1:
@@ -768,12 +782,12 @@ if caso == 2:
                 if target[0] < 0 or target[0] >= 8 or \
                         target[1] < 0 or target[1] >= 8:
                     continue
-                if not casillaAtacada(tablero, target):
+                if not casillaAtacada(tablero, target, Color.NEGRA):
                     # No esta siendo atacada, poner una pieza atacando
                     for _ in range(INTENTOS):
                         pieza = random.choice(opcionesFlatNegro)
                         if pieza in opcionesNegro:
-                            if pieza.posicionarAtaque(tablero, target):
+                            if pieza.posicionarAtaque(tablero, target, Color.NEGRA):
                                 opcionesNegro.remove(pieza)
                                 break
 
