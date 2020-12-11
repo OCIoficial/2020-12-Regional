@@ -100,11 +100,15 @@ bool valid_coordinates(int y, int x) {
 bool is_white_king_in_check(Board board) {
     // Find white king
     int ky, kx;
+    bool found = false;
     for (ky = 0; ky < 8; ky++) {
         for (kx = 0; kx < 8; kx++) {
-            if (board[ky][kx] == (white | king)) break;
+            if (board[ky][kx] == (white | king)) {
+                found = true;
+                break;
+            }
         }
-        if (board[ky][kx] == (white | king)) break;
+        if (found) break;
     }
 
 //     #ifdef DEBUG

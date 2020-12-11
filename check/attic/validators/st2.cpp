@@ -74,11 +74,15 @@ bool valid_coordinates(int y, int x) {
 
 int inCheck(Board board, int color) {
     int ky, kx;
+    bool found = false;
     for (ky = 0; ky < 8; ky++) {
         for (kx = 0; kx < 8; kx++) {
-            if (board[ky][kx].first == color && board[ky][kx].second == king) break;
+            if (board[ky][kx].first == color && board[ky][kx].second == king) {
+                found = true;
+                break;
+            }
         }
-        if (board[ky][kx].first == color && board[ky][kx].second == king) break;
+        if (found) break;
     }
 
     for (auto direction: ROOK_DIRECTIONS) {
