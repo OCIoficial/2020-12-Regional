@@ -12,8 +12,6 @@ def add_case(n, x, a):
 
 random.seed(str(sys.argv[1]))
 
-# print(str(sys.argv[1]))
-
 mode = sys.argv[2]
 n = int(sys.argv[3])
 maxval = int(sys.argv[4])
@@ -40,7 +38,6 @@ elif mode == "small_big":
 elif mode == "tight":
   x = maxval
   maxa = x // n
-  print("maxa", maxa)
   a = [random.randint(1, maxa) for _ in range(n)]
 
 elif mode == "random":
