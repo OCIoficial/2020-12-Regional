@@ -137,7 +137,7 @@ int main() {
         }
     }
 
-    int N = inf.readInt(2, 16, "N");
+    int N = inf.readInt(2, 32, "N");
     inf.readEoln();
 
     for (int i = 0; i < N; i++) {
@@ -152,8 +152,15 @@ int main() {
         ensuref(board[Y][X] == BLANK, "No puede haber dos piezas en la misma posición (%d, %d).", Y, X);
         board[Y][X] = make_pair(C, P);
     }
+
+    ensuref(countColor(board, white) == 1, "El jugador blanco debe tener solo una pieza: el rey.");
+
     ensuref(countPiece(board, white, king) == 1, "Debe haber exactamente un rey blanco.");
+    ensuref(inCheck(board, white), "El rey blanco debe estar en jaque.");
+
     ensuref(countPiece(board, black, king) == 1, "Debe haber exactamente un rey negro.");
+    ensuref(!inCheck(board, black), "El rey negro no debe estar en jaque.");
+
     ensuref(
         max(0, countPiece(board, white, queen) - 1) +
         max(0, countPiece(board, white, rook) - 2) +
@@ -170,10 +177,6 @@ int main() {
         countPiece(board, black, pawn) <= 8,
         "Demasiadas piezas negras."
     );
-    ensuref(inCheck(board, white), "El rey blanco debe estar en jaque.");
-    ensuref(!inCheck(board, black), "El rey negro no debe estar en jaque.");
-
-    ensuref(countColor(board, white) == 1, "El jugador blanco debe tener solo una pieza: el rey.");
 
     inf.readEof();
 }
