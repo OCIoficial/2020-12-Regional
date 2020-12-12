@@ -6,7 +6,7 @@ using namespace std;
 int main() {
     registerValidation();
     
-    int n = inf.readInt(2, 1_000_000, "n");
+    int n = inf.readInt(2, 1000000, "n");
     vector<bool> positions(n, false);
     inf.readEoln();
 
