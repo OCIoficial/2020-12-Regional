@@ -9,10 +9,12 @@
 # Additionally, an argument which is different for every test case, is passed
 # at the beginning. Arguments should be used to generate a uniquely random seed
 # inside the generator.
-# To generate test cases using test plan use `ocimatic gen-input`
+# To generate test cases using test plan use `ocimatic input`.
+# To validate test cases using the specified validator
+# for a subtask, use `ocimatic validate-input`.
 
 
-[Subtask 1]
+[Subtask 1 - validators/st1.cpp]
   # Use sample data as test
   1 ; copy statement/sample-1.in
   1 ; copy statement/sample-2.in
@@ -25,7 +27,7 @@
   3 ; random.cpp 100 1000
 
 
-[Subtask 2]
+[Subtask 2 - validators/st2.cpp]
   # Random tests
   1 ; random.java 10 20 30
   1 ; random.java 20 30 40
