@@ -7,7 +7,7 @@ int main() {
     registerValidation();
     
     int n = inf.readInt(2, 1_000_000, "n");
-    vector<bool> positions(N, false);
+    vector<bool> positions(n, false);
     inf.readEoln();
 
     for (int h = n - 1; h >= 0; h--) {
