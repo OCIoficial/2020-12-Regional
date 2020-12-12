@@ -27,19 +27,20 @@ if mode == "small":
 
 elif mode == "big":
   maxa = maxval
-  x = random.randint(1, maxa)
+  x = random.randint(1, maxa-1)
   a = [random.randint(x+1, maxa) for _ in range(n)]
 
 elif mode == "small_big":
   maxa = maxval
-  x = random.randint(1, maxa)
+  x = maxval // 2
   m = random.randint(1, n);
-  a = [random.randint(1, x // n // 2) for _ in range(m)] + [random.randint(x+1, maxa) for _ in range(n-m)]
+  a = [random.randint(1, x // m // 2) for _ in range(m)] + [random.randint(x+1, maxa) for _ in range(n-m)]
   random.shuffle(a)
 
 elif mode == "tight":
   x = maxval
   maxa = x // n
+  print("maxa", maxa)
   a = [random.randint(1, maxa) for _ in range(n)]
 
 elif mode == "random":
