@@ -76,8 +76,8 @@
 
 [Subtask 2 - validators/st2.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st2/mate-blocked-king.in
-  1 ; copy attic/manual/st2/not-mate-blocked-king.in
+  1 ; copy attic/manual/st2/smothered-mate.in
+  1 ; copy attic/manual/st2/failed-smothered-mate.in
 
   # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
   2 ; generator.py 2 2 0 2 1
@@ -119,7 +119,14 @@
 
 [Subtask 3 - validators/st3.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st3/pawn-cannot-move-diagonally.in
+  1 ; copy attic/manual/st3/fools-mate.in
+  1 ; copy attic/manual/st3/mate-pawn-cannot-move-diagonally.in
+  1 ; copy attic/manual/st3/mate-pinned-blocker-piece.in
+  1 ; copy attic/manual/st3/mate-pinned-capture-piece.in
+  1 ; copy attic/manual/st3/not-mate-not-pinned-blocker-piece.in
+  1 ; copy attic/manual/st3/not-mate-not-pinned-capture-piece.in
+  1 ; copy attic/manual/st3/not-mate-pawn-stops-check-by-advancing.in
+  1 ; copy attic/manual/st3/not-mate-pawn-stops-check-by-capturing.in
 
   # Use sample data as test
   2 ; copy statement/sample-2.in
