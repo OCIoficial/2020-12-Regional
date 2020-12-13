@@ -20,15 +20,21 @@
   1 ; copy statement/sample-2.in
   1 ; copy statement/sample-3.in
 
-  # Random tests -- <N>
-  2 ; generator.py 2
-  2 ; generator.py 10
-  2 ; generator.py 50
-  2 ; generator.py 500
-  2 ; generator.py 999
-  2 ; generator.py 999
-  2 ; generator.py 999
-  2 ; generator.py 999
+  # Random tests -- <N> <PERMUTATIONNESS>
+  2 ; generator.py 2 1
+  2 ; generator.py 3 1
+  2 ; generator.py 4 1
+  2 ; generator.py 6 1
+  2 ; generator.py 8 1
+  2 ; generator.py 10 1
+  2 ; generator.py 50 1
+  2 ; generator.py 500 1
+  2 ; generator.py 999 1
+  2 ; generator.py 999 .8
+  2 ; generator.py 999 .6
+  2 ; generator.py 999 .4
+  2 ; generator.py 999 .2
+  2 ; generator.py 999 0
 
 
 [Subtask 2 - validators/st2.cpp]
@@ -37,14 +43,22 @@
   1 ; copy statement/sample-2.in
   1 ; copy statement/sample-3.in
 
-  # Random tests -- <N>
-  2 ; generator.py 2
-  2 ; generator.py 10
-  2 ; generator.py 50
-  2 ; generator.py 500
-  2 ; generator.py 1000000
-  2 ; generator.py 1000000
-  2 ; generator.py 1000000
-  2 ; generator.py 1000000
-  2 ; generator.py 1000000
+  # Random tests -- <N> <PERMUTATIONNESS>
+  2 ; generator.py 2 1
+  2 ; generator.py 3 1
+  2 ; generator.py 4 1
+  2 ; generator.py 6 1
+  2 ; generator.py 8 1
+  2 ; generator.py 10 1
+  2 ; generator.py 50 1
+  2 ; generator.py 500 1
+  2 ; generator.py 5000 1
+  2 ; generator.py 50000 1
+  2 ; generator.py 500000 1
+  2 ; generator.py 1000000 1
+  2 ; generator.py 1000000 .1
+  2 ; generator.py 1000000 .02
+  2 ; generator.py 1000000 .004
+  2 ; generator.py 1000000 .0008
+  2 ; generator.py 1000000 0
 

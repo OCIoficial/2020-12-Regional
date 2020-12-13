@@ -62,4 +62,6 @@ int main() {
     }
     
     printf("%d\n", pos - 1);
+
+    return 0;
 }
