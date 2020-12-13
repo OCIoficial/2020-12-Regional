@@ -72,7 +72,7 @@ bool valid_coordinates(int y, int x) {
     return 0 <= y && y <= 7 && 0 <= x && x <= 7;
 }
 
-int inCheck(Board board, int color) {
+int numChecks(Board board, int color) {
     int ky, kx;
     bool found = false;
     for (ky = 0; ky < 8; ky++) {
@@ -85,14 +85,16 @@ int inCheck(Board board, int color) {
         if (found) break;
     }
 
+    int count = 0;
+
     for (auto direction: ROOK_DIRECTIONS) {
         int dy = direction[0], dx = direction[1];
         for (int ty = ky + dy, tx = kx + dx; ; ty += dy, tx += dx) {
             if (!valid_coordinates(ty, tx)) break;
             if (board[ty][tx] == BLANK) continue;
             if (board[ty][tx].first == !color && (board[ty][tx].second == rook || board[ty][tx].second == queen))
-                return true;
-            else break;
+                count++;
+            break;
         }
     }
 
@@ -102,30 +104,30 @@ int inCheck(Board board, int color) {
             if (!valid_coordinates(ty, tx)) break;
             if (board[ty][tx] == BLANK) continue;
             if (board[ty][tx].first == !color && (board[ty][tx].second == bishop || board[ty][tx].second == queen))
-                return true;
-            else break;
+                count++;
+            break;
         }
     }
 
     for (auto move: KNIGHT_MOVES) {
         int ty = ky + move[0], tx = kx + move[1];
         if (valid_coordinates(ty, tx) && board[ty][tx].first == 1 - color && board[ty][tx].second == knight)
-            return true;
+            count++;
     }
 
     for (auto move: KING_MOVES) {
         int ty = ky + move[0], tx = kx + move[1];
         if (valid_coordinates(ty, tx) && board[ty][tx].first == 1 - color && board[ty][tx].second == king)
-            return true;
+            count++;
     }
 
     for (auto move: PAWN_CAPTURES) {
         int ty = ky + (color ? -move[0] : move[0]), tx = kx + move[1];
         if (valid_coordinates(ty, tx) && board[ty][tx].first == 1 - color && board[ty][tx].second == pawn)
-            return true;
+            count++;
     }
 
-    return false;
+    return count;
 }
 
 int main() {
@@ -152,18 +154,12 @@ int main() {
         ensuref(board[Y][X] == BLANK, "No puede haber dos piezas en la misma posición (%d, %d).", Y, X);
         board[Y][X] = make_pair(C, P);
     }
-    ensuref(
-        countPiece(board, black, queen) +
-        countPiece(board, black, rook) +
-        countPiece(board, black, bishop) == 0,
-        "El jugador negro solo debe controlar el rey, peones y caballos."
-    );
 
     ensuref(countPiece(board, white, king) == 1, "Debe haber exactamente un rey blanco.");
-    ensuref(inCheck(board, white), "El rey blanco debe estar en jaque.");
+    ensuref(numChecks(board, white) > 1, "El rey blanco debe estar en jaque múltiple.");
 
     ensuref(countPiece(board, black, king) == 1, "Debe haber exactamente un rey negro.");
-    ensuref(!inCheck(board, black), "El rey negro no debe estar en jaque.");
+    ensuref(numChecks(board, black) == 0, "El rey negro no debe estar en jaque.");
 
     ensuref(
         max(0, countPiece(board, white, queen) - 1) +
