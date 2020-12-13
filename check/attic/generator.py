@@ -691,7 +691,8 @@ opcionesBlanco = [Torre] * 2 +  [Alfil] * 2 + [Reina] + [Caballo] * 2 + \
         [Peon] * 8
 opcionesNegro = [Torre] * 2 +  [Alfil] * 2 + [Reina] + [Caballo] * 2 + \
         [Peon] * 8
-opcionesFlat = [Torre, Alfil, Reina, Caballo, Peon]
+# El peon tiene mas probabilidad
+opcionesFlat = [Torre, Alfil, Reina, Caballo] + [Peon] * 5
 
 """
     Casos de prueba: 1. Al menos dos piezas atacan al rey blanco.
@@ -737,7 +738,7 @@ if caso == 1 or caso == 3:
                     continue
                 if not casillaAtacada(tablero, target, Color.NEGRA):
                     # No esta siendo atacada, poner una pieza atacando
-                    for _ in range(INTENTOS):
+                    for _ in range(INTENTOS * 4):
                         pieza = random.choice(opcionesFlat)
                         if pieza in opcionesNegro:
                             if pieza.posicionarAtaque(tablero, target, Color.NEGRA):
@@ -746,7 +747,7 @@ if caso == 1 or caso == 3:
 
 if caso == 2:
     opcionesNegro = [Peon] * 8 + [Caballo] * 2
-    opcionesFlatNegro = [Peon, Caballo]
+    opcionesFlatNegro = [Peon] * 4 + [Caballo]
     # En este caso los ataques de peones o caballos no pueden ser bloqueados
     # por otras piezas
     for _ in range(nPiezasAtk):

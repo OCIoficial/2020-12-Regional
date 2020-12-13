@@ -273,6 +273,9 @@ bool tryAll() {
                 else if (board[i][j].tipo == Rey) {
                     moves = reyMoves(start, Blanco);
                 }
+                else if (board[i][j].tipo == Caballo) {
+                    moves = caballoMoves(start, Blanco);
+                }
                 else if (board[i][j].tipo == Peon) {
                     moves = peonMoves(start, Blanco);
                 }
