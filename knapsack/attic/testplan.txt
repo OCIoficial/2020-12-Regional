@@ -13,23 +13,52 @@
 
 
 [Subtask 1]
-  # Use sample data as test
-  1 ; copy statement/sample-1.in
-  1 ; copy statement/sample-2.in
-
-  # Manual test case
-  2 ; copy attic/manual-1.in
-
-  # Random tests
-  3 ; random.cpp 10 100
-  3 ; random.cpp 100 1000
-
+  small ; generator.py small 2 100
+  small ; generator.py small 2 100
+  big ; generator.py big 2 100
+  big ; generator.py big 2 100
+  small_big ; generator.py small_big 2 100
+  small_big ; generator.py small_big 2 100
+  small_big ; generator.py small_big 2 100
+  small_big ; generator.py small_big 2 100
+  tight ; generator.py tight 2 100
+  tight ; generator.py tight 2 100
+  random ; generator.py random 2 100
+  random ; generator.py random 2 100
+  random ; generator.py random 2 100
+  random ; generator.py random 2 100
+  random ; generator.py random 2 100
 
 [Subtask 2]
-  # Random tests
-  1 ; random.java 10 20 30
-  1 ; random.java 20 30 40
+  small ; generator.py small 100 1000
+  small ; generator.py small 100 1000
+  big ; generator.py big 1000 1000
+  big ; generator.py big 1000 1000
+  small_big ; generator.py small_big 100 1000
+  small_big ; generator.py small_big 100 1000
+  small_big ; generator.py small_big 100 1000
+  small_big ; generator.py small_big 100 1000
+  tight ; generator.py tight 100 1000
+  tight ; generator.py tight 100 1000
+  random ; generator.py random 1000 1000
+  random ; generator.py random 1000 1000
+  random ; generator.py random 1000 1000
+  random ; generator.py random 1000 1000
+  random ; generator.py random 1000 1000
 
-  # More random tests
-  2 ; random.py 1 1000
-
+[Subtask 3]
+  small ; generator.py small 10000 1000000000
+  small ; generator.py small 10000 1000000000
+  big ; generator.py big 10000 1000000000
+  big ; generator.py big 10000 1000000000
+  small_big ; generator.py small_big 10000 1000000000
+  small_big ; generator.py small_big 10000 1000000000
+  small_big ; generator.py small_big 10000 1000000000
+  small_big ; generator.py small_big 10000 1000000000
+  tight ; generator.py tight 10000 1000000000
+  tight ; generator.py tight 10000 1000000000
+  random ; generator.py random 10000 1000000000
+  random ; generator.py random 10000 1000000000
+  random ; generator.py random 10000 1000000000
+  random ; generator.py random 10000 1000000000
+  random ; generator.py random 10000 1000000000
