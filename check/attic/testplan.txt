@@ -16,10 +16,6 @@
 
 [Subtask 1 - validators/st1.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st1/mate-bishops-only-1.in
-  1 ; copy attic/manual/st1/mate-bishops-only-2.in
-  1 ; copy attic/manual/st1/mate-bishops-only-3.in
-  1 ; copy attic/manual/st1/mate-bishops-only-4.in
   1 ; copy attic/manual/st1/mate-knights-only-1.in
   1 ; copy attic/manual/st1/mate-knights-only-2.in
   1 ; copy attic/manual/st1/mate-knights-only-3.in
@@ -28,24 +24,10 @@
   1 ; copy attic/manual/st1/mate-knights-only-6.in
   1 ; copy attic/manual/st1/mate-pawns-only-1.in
   1 ; copy attic/manual/st1/mate-pawns-only-2.in
-  1 ; copy attic/manual/st1/mate-queens-only-1.in
-  1 ; copy attic/manual/st1/mate-queens-only-2.in
-  1 ; copy attic/manual/st1/mate-queens-only-3.in
-  1 ; copy attic/manual/st1/mate-queens-only-4.in
-  1 ; copy attic/manual/st1/mate-rooks-only-1.in
-  1 ; copy attic/manual/st1/mate-rooks-only-2.in
   1 ; copy attic/manual/st1/not-mate-knights-only-1.in
   1 ; copy attic/manual/st1/not-mate-knights-only-2.in
   1 ; copy attic/manual/st1/not-mate-knights-only-3.in
   1 ; copy attic/manual/st1/not-mate-knights-only-4.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-1.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-2.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-3.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-4.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-5.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-6.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-7.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-8.in
 
   # Use sample data as test
   2 ; copy statement/sample-1.in
@@ -105,8 +87,6 @@
 
 [Subtask 2 - validators/st2.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st2/smothered-mate.in
-  1 ; copy attic/manual/st2/failed-smothered-mate.in
 
   # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
   2 ; generator.py 2 2 0 2 1
@@ -149,6 +129,26 @@
 
 [Subtask 3 - validators/st3.cpp]
   # Manual test cases
+  1 ; copy attic/manual/st3/mate-bishops-only-1.in
+  1 ; copy attic/manual/st3/mate-bishops-only-2.in
+  1 ; copy attic/manual/st3/mate-bishops-only-3.in
+  1 ; copy attic/manual/st3/mate-bishops-only-4.in
+  1 ; copy attic/manual/st3/mate-queens-only-1.in
+  1 ; copy attic/manual/st3/mate-queens-only-2.in
+  1 ; copy attic/manual/st3/mate-queens-only-3.in
+  1 ; copy attic/manual/st3/mate-queens-only-4.in
+  1 ; copy attic/manual/st3/mate-rooks-only-1.in
+  1 ; copy attic/manual/st3/mate-rooks-only-2.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-1.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-2.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-3.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-4.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-5.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-6.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-7.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-8.in
+  1 ; copy attic/manual/st3/smothered-mate.in
+  1 ; copy attic/manual/st3/failed-smothered-mate.in
   1 ; copy attic/manual/st3/fools-mate.in
   1 ; copy attic/manual/st3/mate-pawn-cannot-move-diagonally.in
   1 ; copy attic/manual/st3/mate-pinned-blocker-piece.in
