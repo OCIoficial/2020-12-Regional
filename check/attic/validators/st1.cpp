@@ -154,6 +154,12 @@ int main() {
     }
 
     ensuref(countColor(board, white) == 1, "El jugador blanco debe tener solo una pieza: el rey.");
+    ensuref(
+        countPiece(board, black, queen) +
+        countPiece(board, black, rook) +
+        countPiece(board, black, bishop) == 0,
+        "El jugador negro solo debe controlar el rey, peones y caballos."
+    );
 
     ensuref(countPiece(board, white, king) == 1, "Debe haber exactamente un rey blanco.");
     ensuref(inCheck(board, white), "El rey blanco debe estar en jaque.");
