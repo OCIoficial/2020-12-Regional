@@ -668,7 +668,7 @@ def contarPiezas(tablero):
 """
 
 
-random.seed(str(sys.argv))
+random.seed(str(sys.argv[1:]))
 
 caso = int(sys.argv[2])
 nPiezasAtk = int(sys.argv[3])
