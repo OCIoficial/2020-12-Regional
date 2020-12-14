@@ -1,7 +1,6 @@
 \documentclass{oci}
 \usepackage[utf8]{inputenc}
 \usepackage{float}
-\usepackage{realhats}
 
 \title{El lokómon legendario}
 
@@ -14,8 +13,9 @@ la Cordillera Norte.
 Tras una larga batalla, su misión ha sido todo un éxito y logró capturar al lokómon legendario Blatiaz.
 % ¡Esta increíble hazaña aparecerá en los libros de historia!
 
-Ashvier ahora debe descender y regresar al centro lokómon de ciudad Hiérrica para así poder curar
-a sus lokómones.
+Ashvier ahora debe descender y regresar al centro lokómon
+% de ciudad Hiérrica
+para así poder curar a sus lokómones.
 Lamentablemente, su kit de alpinismo se cayó por el acantilado durante la batalla y debe buscar
 una forma alternativa para descender.
 Afortunadamente, su nuevo lokómon legendario Blatiaz tiene la habilidad de planear.
@@ -39,9 +39,10 @@ desplazamiento si su altura $h_k$ es mayor o igual que $h_i$.
 
 A continuación se muestra un ejemplo para $n=4$ montañas.
 En la figura de la izquierda se puede apreciar que Blatiaz puede descender desde la montaña 2
-hasta la montaña 0 pues ésta es de menor altura.
+hasta la montaña 0 pues esta es de menor altura.
 Por el contrario, como se muestra en la figura de la derecha, no es posible descender de la
-montaña 0 hacia la montaña 3 pues la montaña 2 bloquea el desplazamiento.
+montaña 0 hacia la montaña 3 pues, a pesar de que la montaña 3 es más baja, la montaña 2 bloquea el
+desplazamiento.
 
 \begin{center}
 \includegraphics[width=0.48\textwidth]{allowed.png}
@@ -49,17 +50,17 @@ montaña 0 hacia la montaña 3 pues la montaña 2 bloquea el desplazamiento.
 \includegraphics[width=0.48\textwidth]{disallowed.png}
 \end{center}
 
-Desde la montaña 2, Blatiaz también podría descender a las montañas 1 y 3 pero,
+Desde la montaña 2, Blatiaz también podría descender a las montañas 1 y 3 pero
 como es su primera vez planeado sobre Blastiaz, Ashvier tomará algunas precauciones.
-Partiendo de la cima de la montaña más alta, Ashvier siempre descenderá a la cima de la montaña más
-alta que no esté bloqueada.
+Partiendo de la cima de la montaña más alta, Ashvier siempre descenderá a la cima de
+{\bf la montaña más alta que no esté bloqueada}.
 Siguiendo este proceso, llegará a una montaña desde la cual no es posible seguir descendiendo.
 Llamaremos a esta montaña la \emph{montaña final}.
 
-Teniendo la descripción de las montañas, a Ashvier le gustaría saber cuál será la
+Dada la descripción de las montañas, a Ashvier le gustaría saber cuál será la
 montaña final.
 De esta forma puede avisarle de antemano a su amigo el profesor Perezoak, quién lo estará
-esperando para llevarlos a la ciudad Hiérrica.
+esperando para llevarlos al centro lokómon.
 ?`Podrías ayudarlos?
 
 % Blatiaz prefiere las alturas, por lo tanto, el descenso de Ashvier está sujeto al
@@ -83,7 +84,7 @@ esperando para llevarlos a la ciudad Hiérrica.
 \begin{inputDescription}
 
 La entrada consiste de dos líneas.
-La primera contiene solo un entero $n$ ($2 \leq n \leq 1\,000\,000$)
+La primera contiene un solo entero $n$ ($2 \leq n \leq 1\,000\,000$)
 correspondiente al número de montañas que conforman la Cordillera Norte.
 La segunda línea contiene $n$ enteros describiendo las montañas.
 El primer entero corresponde a la posición de la montaña más alta, el segundo a la posición
