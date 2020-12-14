@@ -700,7 +700,9 @@ opcionesFlat = [Torre, Alfil, Reina, Caballo] + [Peon] * 5
                      3. Todo vale.
 """
 
-if caso == 1 or caso == 3:
+if caso == 1:
+    opcionesNegro = [Peon] * 8 + [Caballo] * 2
+    opcionesFlatNegro = [Peon] * 4 + [Caballo] # Los peones son mas probables
     for _ in range(nPiezasExtraBlanca):
         for _ in range(INTENTOS):
             pieza = random.choice(opcionesFlat)
@@ -710,7 +712,7 @@ if caso == 1 or caso == 3:
                 break
     for _ in range(nPiezasExtraNegra):
         for _ in range(INTENTOS):
-            pieza = random.choice(opcionesFlat)
+            pieza = random.choice(opcionesFlatNegro)
             if pieza in opcionesNegro:
                 opcionesNegro.remove(pieza)
                 pieza.posicionarExtra(tablero, Color.NEGRA)
@@ -719,7 +721,7 @@ if caso == 1 or caso == 3:
     # otras no bloqueen la linea de ataque. 
     for _ in range(nPiezasAtk):
         for _ in range(INTENTOS):
-            pieza = random.choice(opcionesFlat)
+            pieza = random.choice(opcionesFlatNegro)
             if pieza in opcionesNegro:
                 if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
                     opcionesNegro.remove(pieza)
@@ -739,20 +741,19 @@ if caso == 1 or caso == 3:
                 if not casillaAtacada(tablero, target, Color.NEGRA):
                     # No esta siendo atacada, poner una pieza atacando
                     for _ in range(INTENTOS * 4):
-                        pieza = random.choice(opcionesFlat)
+                        pieza = random.choice(opcionesFlatNegro)
                         if pieza in opcionesNegro:
                             if pieza.posicionarAtaque(tablero, target, Color.NEGRA):
                                 opcionesNegro.remove(pieza)
                                 break
 
 if caso == 2:
-    opcionesNegro = [Peon] * 8 + [Caballo] * 2
-    opcionesFlatNegro = [Peon] * 4 + [Caballo]
     # En este caso los ataques de peones o caballos no pueden ser bloqueados
     # por otras piezas
+    assert(nPiezasAtk >= 2)
     for _ in range(nPiezasAtk):
         for _ in range(INTENTOS):
-            pieza = random.choice(opcionesFlatNegro)
+            pieza = random.choice(opcionesFlat)
             if pieza in opcionesNegro:
                 if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
                     opcionesNegro.remove(pieza)
@@ -766,7 +767,7 @@ if caso == 2:
                 break
     for _ in range(nPiezasExtraNegra):
         for _ in range(INTENTOS):
-            pieza = random.choice(opcionesFlatNegro)
+            pieza = random.choice(opcionesFlat)
             if pieza in opcionesNegro:
                 opcionesNegro.remove(pieza)
                 pieza.posicionarExtra(tablero, Color.NEGRA)
@@ -774,23 +775,93 @@ if caso == 2:
 
     # Cubrir toda el area al rededor del rey
     if mate == 1:
-        for i in [-1, 0, 1]:
-            for j in [-1, 0, 1]:
-                if i == 0 and j == 0:
-                    continue
-                (y, x) = reyBlanco
-                target = (y + i, x + j)
-                if target[0] < 0 or target[0] >= 8 or \
-                        target[1] < 0 or target[1] >= 8:
-                    continue
-                if not casillaAtacada(tablero, target, Color.NEGRA):
-                    # No esta siendo atacada, poner una pieza atacando
-                    for _ in range(INTENTOS):
-                        pieza = random.choice(opcionesFlatNegro)
-                        if pieza in opcionesNegro:
-                            if pieza.posicionarAtaque(tablero, target, Color.NEGRA):
-                                opcionesNegro.remove(pieza)
-                                break
+        for whites in [True, False]:
+            for i in [-1, 0, 1]:
+                for j in [-1, 0, 1]:
+                    if i == 0 and j == 0:
+                        continue
+                    (y, x) = reyBlanco
+                    target = (y + i, x + j)
+                    if target[0] < 0 or target[0] >= 8 or \
+                            target[1] < 0 or target[1] >= 8:
+                        continue
+                    if not casillaAtacada(tablero, target, Color.NEGRA):
+                        # No esta siendo atacada, poner una pieza atacando
+                        if whites:
+                            if tablero[target[0]][target[1]].tipo is Tipo.VACIA:
+                                if random.choice([True, False, False]):
+                                    # 50/50 de bloquear con una pieza blanca
+                                    pieza = random.choice(opcionesBlanco)
+                                    tablero[target[0]][target[1]] = pieza(Color.BLANCA)
+                                    opcionesBlanco.remove(pieza)
+                                    break
+                        else:
+                            if tablero[target[0]][target[1]].color is not Color.BLANCA:
+                                # Si no esta bloqueada por una pieza blanca
+                                for _ in range(INTENTOS * 4):
+                                    # Poner una pieza negra atacando
+                                    pieza = random.choice(opcionesNegro)
+                                    if pieza.posicionarAtaque(tablero, target, Color.NEGRA):
+                                        opcionesNegro.remove(pieza)
+                                        break
+
+if caso == 3:
+    # En este caso los ataques de peones o caballos no pueden ser bloqueados
+    # por otras piezas
+    for _ in range(nPiezasAtk):
+        for _ in range(INTENTOS):
+            pieza = random.choice(opcionesFlat)
+            if pieza in opcionesNegro:
+                if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
+                    opcionesNegro.remove(pieza)
+                    break
+    for _ in range(nPiezasExtraBlanca):
+        for _ in range(INTENTOS):
+            pieza = random.choice(opcionesFlat)
+            if pieza in opcionesBlanco:
+                opcionesBlanco.remove(pieza)
+                pieza.posicionarExtra(tablero, Color.BLANCA)
+                break
+    for _ in range(nPiezasExtraNegra):
+        for _ in range(INTENTOS):
+            pieza = random.choice(opcionesFlat)
+            if pieza in opcionesNegro:
+                opcionesNegro.remove(pieza)
+                pieza.posicionarExtra(tablero, Color.NEGRA)
+                break
+
+    # Cubrir toda el area al rededor del rey
+    if mate == 1:
+        for whites in [True, False]:
+            for i in [-1, 0, 1]:
+                for j in [-1, 0, 1]:
+                    if i == 0 and j == 0:
+                        continue
+                    (y, x) = reyBlanco
+                    target = (y + i, x + j)
+                    if target[0] < 0 or target[0] >= 8 or \
+                            target[1] < 0 or target[1] >= 8:
+                        continue
+                    if not casillaAtacada(tablero, target, Color.NEGRA):
+                        # No esta siendo atacada, poner una pieza atacando
+                        if whites:
+                            if tablero[target[0]][target[1]].tipo is Tipo.VACIA:
+                                if random.choice([True, False, False]):
+                                    # 50/50 de bloquear con una pieza blanca
+                                    pieza = random.choice(opcionesBlanco)
+                                    tablero[target[0]][target[1]] = pieza(Color.BLANCA)
+                                    opcionesBlanco.remove(pieza)
+                                    break
+                        else:
+                            if tablero[target[0]][target[1]].color is not Color.BLANCA:
+                                # Si no esta bloqueada por una pieza blanca
+                                for _ in range(INTENTOS * 4):
+                                    # Poner una pieza negra atacando
+                                    pieza = random.choice(opcionesNegro)
+                                    if pieza.posicionarAtaque(tablero, target, Color.NEGRA):
+                                        opcionesNegro.remove(pieza)
+                                        break
+
 
 print(contarPiezas(tablero))
 printInput(tablero)
