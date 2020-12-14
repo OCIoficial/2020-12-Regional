@@ -48,7 +48,7 @@
 %% HEADER
 \getenv[\phase]{OCIMATIC_PHASE}
 
-\setlength\headheight{54.3pt} 
+\setlength\headheight{54.3pt}
 \pagestyle{fancy}
 \lhead{\includegraphics[height=34pt]{logo.eps}}
 \rhead{\phase\ \the\year}
@@ -120,7 +120,7 @@
 \NewDocumentCommand{\sampleIO}{O{0.45}O{0.45}m}{%
   \begin{minipage}[c]{\textwidth}
     \begin{center}
-      \begin{tabu}{|l|} 
+      \begin{tabu}{|l|}
         \taburulecolor{samplegray}
         \hline
         \begin{minipage}[t]{#1\textwidth}
@@ -147,8 +147,6 @@
 
 \newcounter{subtaskcnt}
 \newenvironment{scoreDescription}{\subsection*{Subtareas y puntaje}\setcounter{subtaskcnt}{1}}{}
-\newcommand{\subtask}[1]{\subsubsection*{Subtarea \arabic{subtaskcnt} (#1 puntos)}\stepcounter{subtaskcnt}}
+\newcommand{\subtask}[1]{\subsubsection*{Subtarea \arabic{subtaskcnt} (#1 puntos)}\vspace{-1em}\stepcounter{subtaskcnt}}
 
 \newenvironment{sampleDescription}{\subsection*{Ejemplos de entrada y salida}}{}
-
-

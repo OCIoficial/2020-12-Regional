@@ -50,26 +50,28 @@
 
 \begin{problemDescription}
 Elizabeth es una maestra mundial de ajedrez.
-Tras una serie de victorias su popularidad ha aumentado enormemente,
-atrayendo cientos de jugadores que quieren desafiarla.
+Tras muchas victorias, Elizabeth ha notado que algunos jugadores les toma
+demasiado tiempo darse cuenta de que perdieron, por lo que ella debe explicarles el jaque mate.
+% Tras una serie de victorias su popularidad ha aumentado enormemente,
+% atrayendo cientos de jugadores que quieren desafiarla.
 % Para maximizar la cantidad de jugadores que puede derrotar, Elizabeth ha decidido jugar
 % docenas de partidas simultáneamente.
-Tras algunas partidas, Elizabeth ha notado que a algunos jugadores les toma demasiado
-tiempo darse cuenta de que perdieron, por lo que ella debe explicarles el jaque mate.
+% Tras algunas partidas, Elizabeth ha notado que a algunos jugadores les toma demasiado
+% tiempo darse cuenta de que perdieron, por lo que ella debe explicarles el jaque mate.
 % quita tiempo de las otras partidas.
 
 Tu tarea en este problema es simple.
 Debes ayudar a Elizabeth creando un programa que determine si una posición
-en un tablero de ajedrez es jaque mate.
+en un tablero de ajedrez es jaque mate para el oponente de Elizabeth.
 A continuación se describen las reglas del ajedrez y cuando una posición es jaque mate.
 
 \subsection*{Reglas del juego}
 
 El ajedrez se juega entre dos jugadores sobre un tablero de $8\times 8$ casillas.
-En el contexto de este problema, enumeraremos las filas del tablero de arriba hacia
-abajo entre 0 y 7, y las columnas de izquierda a derecha entre 0 y 7.
+En el contexto de este problema, enumeraremos las columnas del tablero de izquierda a derecha
+entre 0 y 7, y las filas arriba hacia abajo entre 0 y 7.
 Uno de los jugadores controla 16 piezas blancas y el otro controla 16 piezas negras.
-En el contexto de este problema, \textbf{Elizabeth siempre jugará con las piezas negras}.
+\textbf{Elizabeth siempre controlará las piezas negras}.
 Existen 6 tipos de piezas:
 la torre (\symrook),
 el alfil (\symbishop),
@@ -79,19 +81,19 @@ el caballo (\symknight)
 y el peón (\sympawn).
 Cada jugador comienza el juego con 8 peones, 2 torres, 2 caballos, 2 alfiles, 1 reina y
 1 rey.
-Luego, las piezas negras son ubicadas en la parte superior del tablero y las blancas
+Al inicio del juego las piezas negras son ubicadas en la parte superior del tablero y las blancas
 en la parte inferior como se muestra en la siguiente figura.
 
 \begin{center}
 \chessboard[setfen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR]
 \end{center}
 
-Los jugadores toman turnos para mover una de sus piezas desde una casilla.
+Los jugadores toman turnos y en cada turno deben mover una de sus piezas desde una casilla a otra.
 Cada tipo de pieza tiene distintas reglas para poder moverse.
-A continuación se describen las reglas para mover la torre, el alfil, la reina, el rey y el caballo,
+A continuación se describen las reglas para mover las piezas,
 excluyendo al peón que será descrito más adelante.
-Adicionalmente, para cada pieza se muestra una figura ilustrando las posibles casillas en un
-tablero de $5\times 5$ a las que podría moverse cada pieza en un solo movimiento.
+Adicionalmente, para cada pieza se muestra una figura marcando con una cruz las posibles casillas
+en un tablero de $5\times 5$ a las que podría moverse cada pieza en un solo movimiento.
 
 % \hspace{-3.2em}
 \newcolumntype{A}{>{}p{.17\textwidth} }
@@ -146,16 +148,16 @@ tablero de $5\times 5$ a las que podría moverse cada pieza en un solo movimient
 Siguiendo las reglas anteriores, las piezas pueden moverse libremente a cualquier casilla vacía
 pero sin pasar por encima de otra pieza, a excepción del caballo que puede saltar sobre otras
 piezas en su movimiento de ``L''.
-Adicionalmente, una pieza puede moverse a una casilla conteniendo una pieza de otro color en cuyo
-caso la pieza del otro color será \emph{capturada} y removida del tablero.
-Si una pieza $a$ puede en un movimiento moverse a la casilla donde está la pieza $b$ y capturarla,
-diremos que la pieza $a$ está \emph{atacando} a la pieza $b$.
-A continuación mostramos algunos ejemplos.
-En el primero, el alfil en la casilla (3, 1) está atacando a la torre en la casilla (6, 4).
-En el segundo el alfil no está atacando a la torre pues el caballo en la casilla (5, 3)
+Adicionalmente, una pieza puede moverse a una casilla conteniendo una pieza adversaria en cuyo
+caso la pieza adversaria será \emph{capturada} y removida del tablero.
+Si una pieza $p$ puede capturar en un movimiento a la pieza $q$,
+diremos que la pieza $p$ está \emph{atacando} a la pieza $q$.
+A continuación mostramos algunos ejemplos de esto.
+En el primero ejemplo, el alfil en la casilla (3, 1) está atacando a la torre en la casilla (6, 4).
+En el segundo, el alfil no está atacando a la torre pues el caballo en la casilla (5, 3)
 bloquea el movimiento.
 Finalmente, en el tercer ejemplo el caballo en la casilla (3, 4) está atacando al alfil
-en la casilla (5, 3) pues esté puede saltar sobre otras piezas.
+en la casilla (5, 3) pues este puede saltar sobre otras piezas.
 
 \setchessboard{style=8x8}
 \begin{center}
@@ -187,17 +189,17 @@ El peón negro puede moverse a la casilla en frente pues esta está vacía. Tamb
 moverse a alguna de las diagonales y capturar una de las torres.
 
 &
-\boardsmall[setpieces={pc4,Bc3}]
+\boardsmall[setpieces={bc3,Pc2}]
 &
 \vspace{-7.5em}
 No hay movimientos posibles para el peón pues la casilla en frente está ocupada por
-el alfil blanco y no hay piezas para capturar en las diagonales.
+el alfil negro y no hay piezas para capturar en las diagonales.
 \end{tabularx}
 
 Finalmente, diremos que el rey está en \emph{jaque} si hay una pieza atacándolo.
 Cuando un jugador tiene su rey en jaque en su siguiente movimiento está obligado a sacarlo del
 jaque.
-Si no existe ningún movimiento con él cuál es posible evadir el jaque, se dirá
+Si no existe ningún movimiento con el cual es posible evadir el jaque, se dirá
 que la \emph{posición} es un \emph{jaque mate} y el jugador con su rey en jaque perderá el juego.
 La siguiente figura muestra un tablero con una posición que es jaque mate.
 En primer lugar, el rey blanco está en jaque pues la reina lo está atacando.
@@ -205,48 +207,66 @@ Si el rey negro se mueve a las casillas (6,0) o (7, 1) seguirá siendo atacado p
 podrá ser capturado en el siguiente turno.
 Si se mueve a la casilla (6, 1) y captura a la reina, seguirá estando en jaque pues el rey
 negro puede capturarlo moviéndose a esta casilla en el siguiente turno.
-Como no existen más movimientos posibles esta posición es jaque mate.
+Como no existen más movimientos posibles para el rey blanco, esta posición es jaque mate.
 
 \setchessboard{style=8x8}
 \begin{center}
 \scalebox{1}{\chessboard[setfen=7K/6q1/6k1/8/8/8/8/8]}
 \end{center}
 
-Dada la descripción del tablero tu tarea es escribir un programa que determine si esta posición
-es jaque mate para las piezas blancas.
+Dada la descripción del tablero, tu tarea es escribir un programa que determine si Elizabeth
+(piezas negras) tiene a su oponente en jaque mate (piezas blancas).
+
+{\bf Nota}\hspace{0.5em} En ajedrez los peones también tienen reglas distintas cuando se mueven
+por primera vez.
+Además existe el \emph{enroque}, la \emph{coronación} y
+capturar \emph{en passant}.
+Ninguna de estas reglas debe ser consideradas en el contexto de este problema.
 
 \end{problemDescription}
 
 \begin{inputDescription}
 La entrada comienza con una línea que contiene un entero $n$ ($ 3 \leq n
     \leq 32$) representando la cantidad de piezas en el tablero.
-
 Las siguientes $n$ líneas representan cada una de las piezas en el tablero.
 Cada una de estas líneas contiene 4 enteros $c, p, y$ y $x$.
-El entero $c$ representa el color de la pieza y será 0 si la pieza es blanca o $1$
-si la pieza es negra.
+
+El entero $c$ representa el color de la pieza y será {\bf 0 si la pieza es blanca} o
+{\bf $1$ si la pieza es negra}.
+
 El segundo entero $p$ es el tipo de la pieza.
-Este será $0$ si es una torre, $1$ si es alfil, $2$ si es reina, $3$ si es rey, $4$
-si es caballo o $5$ si es peón.
+Este será {\bf $0$ si es una torre, $1$ si es alfil, $2$ si es reina, $3$ si es rey, $4$
+si es caballo o $5$ si es peón}.
+
 El valor $y$ ($0\leq y \leq 7$) corresponde al índice de la fila en la cual se encuentra
 ubicada la pieza.
 Finalmente el valor $x$ ($0\leq x \leq 7$) corresponde al índice de la columna en que
 la pieza se encuentra ubicada.
+
+La cantidad de piezas respetará las reglas descritas para el ajedrez.
+Es decir, la cantidad de total de peones de cada color será menor o igual que 8, la de torres
+menor o igual que 2, la de caballos menor o igual que 2, la de alfiles menor o igual que 2 y la
+de reinas menor o igual que 1.
+Adicionalmente, habrá exactamente un rey negro y exactamente un rey blanco.
+Finalmente, el rey negro siempre estará en jaque.
+Es decir, al menos una pieza de color blanco estará atacando al rey negro.
 \end{inputDescription}
 
 \begin{outputDescription}
 Tu programa debe imprimir una única linea con solo un 1 si
-Elizabeth (negras) tiene a su oponente en jaque mate.
+Elizabeth (piezas negras) tiene a su oponente en jaque mate, o 0 en caso contrario.
 \end{outputDescription}
 
 \begin{scoreDescription}
   \subtask{20}
-  El jugador blanco tiene solo una pieza: el rey.
+  Se probarán varios casos en los que Elizabeth (piezas negras) solo tiene caballos, peones
+  y al rey; y el oponente (piezas blancas) tiene solo una pieza: el rey.
   \subtask{30}
-  Elizabeth solo controla el rey, peones y caballos.
+  Se probarán varios casos en que el jaque es múltiple, es decir, hay más de una pieza
+  blanca que está atacando al rey blanco.
+  Puede haber tanto piezas blancas como negras de cualquier tipo.
   \subtask{50}
-  No hay restricciones en la cantidad o tipo de piezas que Elizabeth y
-  su oponente pueden controlar.
+  Se probarán varios casos sin restricciones adicionales.
 \end{scoreDescription}
 
 \begin{sampleDescription}
