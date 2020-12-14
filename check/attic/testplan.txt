@@ -16,18 +16,20 @@
 
 [Subtask 1 - validators/st1.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st1/mate-knights-only-1.in
-  1 ; copy attic/manual/st1/mate-knights-only-2.in
-  1 ; copy attic/manual/st1/mate-knights-only-3.in
-  1 ; copy attic/manual/st1/mate-knights-only-4.in
-  1 ; copy attic/manual/st1/mate-knights-only-5.in
-  1 ; copy attic/manual/st1/mate-knights-only-6.in
-  1 ; copy attic/manual/st1/mate-pawns-only-1.in
-  1 ; copy attic/manual/st1/mate-pawns-only-2.in
-  1 ; copy attic/manual/st1/not-mate-knights-only-1.in
-  1 ; copy attic/manual/st1/not-mate-knights-only-2.in
-  1 ; copy attic/manual/st1/not-mate-knights-only-3.in
-  1 ; copy attic/manual/st1/not-mate-knights-only-4.in
+  1 ; copy attic/manual/st1/black-king-knight-1.in
+  1 ; copy attic/manual/st1/black-king-knight-2.in
+  1 ; copy attic/manual/st1/black-king-knight-3.in
+  1 ; copy attic/manual/st1/black-king-pawns-edge.in
+  1 ; copy attic/manual/st1/white-king-black-knights-1.in
+  1 ; copy attic/manual/st1/white-king-black-knights-2.in
+  1 ; copy attic/manual/st1/white-king-black-knights-3.in
+  1 ; copy attic/manual/st1/white-king-black-knights-4.in
+  1 ; copy attic/manual/st1/white-king-black-knights-5.in
+  1 ; copy attic/manual/st1/white-king-black-knights-6.in
+  1 ; copy attic/manual/st1/white-king-black-knights-7.in
+  1 ; copy attic/manual/st1/white-king-black-knights-8.in
+  1 ; copy attic/manual/st1/white-king-black-pawns-1.in
+  1 ; copy attic/manual/st1/white-king-black-pawns-2.in
 
   # Use sample data as test
   2 ; copy statement/sample-1.in
