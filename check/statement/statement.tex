@@ -1,58 +1,242 @@
 \documentclass{oci}
+\usepackage{booktabs}
+\usepackage{skak}
+\usepackage{chessboard}
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
+\usepackage{expl3}
+\usepackage{tabularx}
 
-\title{Check}
+
+\ExplSyntaxOn
+\def\reverserank{
+  {\int_eval:n{8 - \value{ranklabel}}}
+}
+\def\zeroindexfile{
+  {\int_eval:n{\value{filelabel} - 1}}
+}
+\ExplSyntaxOff
+
+\setchessboard{
+  color=red, labelbottom=false, marginleft=false, marginright=false, marginbottom=false,
+  shortenstart=0.5ex, shortenend=0.5ex
+}
+
+\storechessboardstyle{8x8}{%
+  showmover=false,
+  hlabelformat=\reverserank,
+  vlabelformat=\zeroindexfile,
+  printarea=a1-h8,
+  labelleft,
+  labeltop,
+  vlabellift=0.35em,
+  margintop=false,
+}
+
+\storechessboardstyle{5x5}{
+  printarea=a1-e5,
+  labelleft=false,
+  labeltop=false,
+  markstyle=cross,
+  margintop,
+  margintopwidth=0.4em
+}
+
+\setchessboard{style=8x8}
+
+\title{Jaque mate}
 
 \begin{document}
+
 \begin{problemDescription}
-Elizabeth es una maestra mundial de ajedrez, gracias a sus constantes
-victorias su popularidad ha aumentado enormemente, atrayendo cientos
-de jugadores que quieren desafiarla. Para maximizar la cantidad de
-jugadores que puede derrotar en un día, Elizabeth ha decidido jugar
-docenas de partidas simultáneamente.
+Elizabeth es una maestra mundial de ajedrez.
+Tras una serie de victorias su popularidad ha aumentado enormemente,
+atrayendo cientos de jugadores que quieren desafiarla.
+% Para maximizar la cantidad de jugadores que puede derrotar, Elizabeth ha decidido jugar
+% docenas de partidas simultáneamente.
+Tras algunas partidas, Elizabeth ha notado que a algunos jugadores les toma demasiado
+tiempo darse cuenta de que perdieron, por lo que ella debe explicarles el jaque mate.
+% quita tiempo de las otras partidas.
 
-En su experiencia jugando múltiples partidas simultáneamente,
-Elizabeth ha notado que a algunos jugadores les toma tiempo reconocer
-cuando pierden, por lo que ella debe explicar el check mate, lo que le
-quita tiempo de las otras partidas.
+Tu tarea en este problema es simple.
+Debes ayudar a Elizabeth creando un programa que determine si una posición
+en un tablero de ajedrez es jaque mate.
+A continuación se describen las reglas del ajedrez y cuando una posición es jaque mate.
 
-Ayuda a Elizabeth con un programa que le permita a sus rivales saber
-cuando el tablero está en una posición de check mate.
+\subsection*{Reglas del juego}
 
-TODO: explicar el check mate
+El ajedrez se juega entre dos jugadores sobre un tablero de $8\times 8$ casillas.
+En el contexto de este problema, enumeraremos las filas del tablero de arriba hacia
+abajo entre 0 y 7, y las columnas de izquierda a derecha entre 0 y 7.
+Uno de los jugadores controla 16 piezas blancas y el otro controla 16 piezas negras.
+En el contexto de este problema, \textbf{Elizabeth siempre jugará con las piezas negras}.
+Existen 6 tipos de piezas:
+la torre (\symrook),
+el alfil (\symbishop),
+la reina (\symqueen),
+el rey (\symking),
+el caballo (\symknight)
+y el peón (\sympawn).
+Cada jugador comienza el juego con 8 peones, 2 torres, 2 caballos, 2 alfiles, 1 reina y
+1 rey.
+Luego, las piezas negras son ubicadas en la parte superior del tablero y las blancas
+en la parte inferior como se muestra en la siguiente figura.
 
-  En el ajedrez existen 6 tipos de piezas: la torre, el alfil, la reina, el rey, el caballo y el peón.
-  A continuación se describen las reglas de movimiento de cada pieza.
-  Adicionalmente, la figura de más abajo muestra las posibles casillas en un tablero de $5\times 5$ a las que podría moverse cada pieza en un solo movimiento.
-  \begin{itemize}
-    \item \textbf{Torre:} La torre puede moverse en línea recta de forma horizontal o vertical cuantas casillas quiera en un movimiento.
-    \item \textbf{Alfil:} El alfil puede moverse a lo largo de una diagonal cuantas casillas quiera en un movimiento.
-    \item \textbf{Reina:} La reina es una combinación de la torre y el alfil, ya que puede moverse en diagonal, horizontal o verticalmente cuantas casillas quiera en un movimiento.
-    \item \textbf{Rey:} El rey, al igual que la reina, puede moverse en cualquier dirección pero solo una casilla por movimiento.
-    \item \textbf{Caballo:} El caballo es la pieza con el movimiento más complicado. Su movimiento es en forma de ``L'', es decir, siempre se mueve 2 casillas en una dirección (horizontal o vertical), y luego una casilla en la otra dirección.
-    \item \textbf{Peón:} El peón puede moverse solamente hacia adelante, pero al capturar solo puede hacerlo diagonalmente en una casilla hacia adelante.
-  \end{itemize}
+\begin{center}
+\chessboard[setfen=rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR]
+\end{center}
+
+Los jugadores toman turnos para mover una de sus piezas desde una casilla.
+Cada tipo de pieza tiene distintas reglas para poder moverse.
+A continuación se describen las reglas para mover la torre, el alfil, la reina, el rey y el caballo,
+excluyendo al peón que será descrito más adelante.
+Adicionalmente, para cada pieza se muestra una figura ilustrando las posibles casillas en un
+tablero de $5\times 5$ a las que podría moverse cada pieza en un solo movimiento.
+
+% \hspace{-3.2em}
+\newcolumntype{A}{>{}p{.17\textwidth} }
+\newcolumntype{B}{>{}p{.31\textwidth} }
+\newcommand{\boardsmall}[1][]{\scalebox{0.75}{\chessboard[#1]}}
+\newcommand{\vadj}{\vspace{0em}}
+\def\arraystretch{1.5}
+\setlength{\tabcolsep}{0em}
+\setchessboard{style=5x5}
+\begin{tabularx}{\textwidth}[t]{AB@{\hspace{.03\textwidth}}AB}
+  \textbf{Torre}
+  \boardsmall[setpieces={rc3}, markfields={c1,c2,c4,c5,a3,b3,d3,e3}]
+  &
+  \vadj
+  La torre puede moverse en línea recta de forma horizontal o vertical cuantas casillas quiera en
+  un movimiento pero solo en una dirección.
+
+  &
+  \textbf{Alfil}
+
+  \boardsmall[setpieces={bc3}, markfields={a1,b2,d4,e5,a5,b4,d2,e1}]
+  &
+  \vadj
+  El alfil es similar a la torre pero en vez de moverse de forma horizontal o vertical
+  puede moverse a lo largo de una diagonal cuantas casillas quiera en un movimiento.
+  \\
+
+  \textbf{Reina}
+  \boardsmall[setpieces={qc3}, markfields={a1,b2,d4,e5,a5,b4,d2,e1,c1,c2,c4,c5,a3,b3,d3,e3}]
+  &
+  \vspace{0.1em}
+  La reina es una combinación de la torre y el alfil, ya que puede moverse en diagonal,
+  horizontal o verticalmente cuantas casillas quiera en un movimiento.
+
+  &
+  \textbf{Rey}
+  \boardsmall[setpieces={kc3}, markfields={b2,d4,b4,d2,c2,c4,b3,d3}]
+  &
+  \vspace{0.2em}
+  El rey, al igual que la reina, puede moverse en cualquier dirección pero solo una casilla por
+  movimiento.
+  \\
+
+  \textbf{Caballo}
+  \boardsmall[setpieces={nc3}, markfields={a4,a2,b5,b1,d5,d1,e4,e2}]
+  &
+  \vspace{0.1em}
+  El caballo tiene un movimiento en forma de ``L'', es decir, siempre se mueve
+  2 casillas en una dirección (horizontal o vertical), y luego una casilla en la otra dirección.
+\end{tabularx}
+
+Siguiendo las reglas anteriores, las piezas pueden moverse libremente a cualquier casilla vacía
+pero sin pasar por encima de otra pieza, a excepción del caballo que puede saltar sobre otras
+piezas en su movimiento de ``L''.
+Adicionalmente, una pieza puede moverse a una casilla conteniendo una pieza de otro color en cuyo
+caso la pieza del otro color será \emph{capturada} y removida del tablero.
+Si una pieza $a$ puede en un movimiento moverse a la casilla donde está la pieza $b$ y capturarla,
+diremos que la pieza $a$ está \emph{atacando} a la pieza $b$.
+A continuación mostramos algunos ejemplos.
+En el primero, el alfil en la casilla (3, 1) está atacando a la torre en la casilla (6, 4).
+En el segundo el alfil no está atacando a la torre pues el caballo en la casilla (5, 3)
+bloquea el movimiento.
+Finalmente, en el tercer ejemplo el caballo en la casilla (3, 4) está atacando al alfil
+en la casilla (5, 3) pues esté puede saltar sobre otras piezas.
+
+\setchessboard{style=8x8}
+\begin{center}
+\scalebox{0.75}{\chessboard[setpieces={bd7,Rg4},markstyle=straightmove,markmove=d7-g4]}
+\hspace{3em}
+\scalebox{0.75}{\chessboard[setpieces={bd7,nf5,Rg4}]}
+\hspace{3em}
+\scalebox{0.75}{\chessboard[setpieces={nd4, be5, Bf5,pf4},markstyle=knightmove,markmove=d4-f5]}
+\end{center}
+
+El peón tiene las reglas de movimientos más complejas del ajedrez.
+En primer lugar, a diferencia de las otras piezas que pueden avanzar o retroceder, el peón solo
+puede moverse hacia adelante.
+Es decir, los peones negros solo pueden moverse hacia una casilla cuya fila tenga un índice
+mayor, mientras que los blancos solo pueden moverse a una casilla cuya fila tenga un índice menor.
+En segundo lugar, los peones se mueven de forma distinta dependiendo de si se mueven
+hacia una casilla vacía o si están capturando.
+Específicamente, un peón puede moverse una casilla hacia adelante si esta está vacía
+o puede capturar una pieza adversaria si esta está en cualquiera de las casillas diagonales
+en frente del peón.
+
+\setchessboard{style=5x5, shortenend=0ex, shortenstart=0.1ex}
+
+\begin{tabularx}{\textwidth}[t]{AB@{\hspace{.03\textwidth}}AB}
+\boardsmall[setpieces={pc4,Rb3,Rd3}, markstyle=straightmove, markmoves={c4-b3,c4-d3,c4-c3}]
+&
+\vspace{-7.5em}
+El peón negro puede moverse a la casilla en frente pues esta está vacía. También puede
+moverse a alguna de las diagonales y capturar una de las torres.
+
+&
+\boardsmall[setpieces={pc4,Bc3}]
+&
+\vspace{-7.5em}
+No hay movimientos posibles para el peón pues la casilla en frente está ocupada por
+el alfil blanco y no hay piezas para capturar en las diagonales.
+\end{tabularx}
+
+Finalmente, diremos que el rey está en \emph{jaque} si hay una pieza atacándolo.
+Cuando un jugador tiene su rey en jaque en su siguiente movimiento está obligado a sacarlo del
+jaque.
+Si no existe ningún movimiento con él cuál es posible evadir el jaque, se dirá
+que la \emph{posición} es un \emph{jaque mate} y el jugador con su rey en jaque perderá el juego.
+La siguiente figura muestra un tablero con una posición que es jaque mate.
+En primer lugar, el rey blanco está en jaque pues la reina lo está atacando.
+Si el rey negro se mueve a las casillas (6,0) o (7, 1) seguirá siendo atacado por la reina y
+podrá ser capturado en el siguiente turno.
+Si se mueve a la casilla (6, 1) y captura a la reina, seguirá estando en jaque pues el rey
+negro puede capturarlo moviéndose a esta casilla en el siguiente turno.
+Como no existen más movimientos posibles esta posición es jaque mate.
+
+\setchessboard{style=8x8}
+\begin{center}
+\scalebox{1}{\chessboard[setfen=7K/6q1/6k1/8/8/8/8/8]}
+\end{center}
+
+Dada la descripción del tablero tu tarea es escribir un programa que determine si esta posición
+es jaque mate para las piezas blancas.
 
 \end{problemDescription}
 
 \begin{inputDescription}
-    La entrada comienza con una linea que contiene un entero $ 1 < n
-    \leq 32$ representando la cantidad de piezas en el tablero.
+La entrada comienza con una línea que contiene un entero $n$ ($ 3 \leq n
+    \leq 32$) representando la cantidad de piezas en el tablero.
 
-    Las siguientes $n$ lineas representan cada una de las piezas en el
-    tablero en el formato $c, p, y, x$, donde $c$ representa el color
-    de la pieza, por lo que puede tomar valores $0 = $ blanca o $1
-    = $ negra. $p$ es el tipo de pieza: $0 =$ torre, $1 = $ alfil, $2
-    = $ Reina, $3 = rey$, $4 = $ caballo, $5 = $ peón. $0 \leq y < 8$ es la fila en
-    la cual se encuentra ubicada la pieza en el tablero, y $x$ es la
-    columna de la pieza en el tablero. La esquina superior izquierda
-    es (0, 0).
+Las siguientes $n$ líneas representan cada una de las piezas en el tablero.
+Cada una de estas líneas contiene 4 enteros $c, p, y$ y $x$.
+El entero $c$ representa el color de la pieza y será 0 si la pieza es blanca o $1$
+si la pieza es negra.
+El segundo entero $p$ es el tipo de la pieza.
+Este será $0$ si es una torre, $1$ si es alfil, $2$ si es reina, $3$ si es rey, $4$
+si es caballo o $5$ si es peón.
+El valor $y$ ($0\leq y \leq 7$) corresponde al índice de la fila en la cual se encuentra
+ubicada la pieza.
+Finalmente el valor $x$ ($0\leq x \leq 7$) corresponde al índice de la columna en que
+la pieza se encuentra ubicada.
 \end{inputDescription}
 
 \begin{outputDescription}
-    Tu programa debe imprimir una única linea con solo un 1 si es
-    Elizabeth (negras) tiene a su oponente en jaque mate.
+Tu programa debe imprimir una única linea con solo un 1 si
+Elizabeth (negras) tiene a su oponente en jaque mate.
 \end{outputDescription}
 
 \begin{scoreDescription}
