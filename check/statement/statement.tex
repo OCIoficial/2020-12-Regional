@@ -153,7 +153,7 @@ caso la pieza adversaria será \emph{capturada} y removida del tablero.
 Si una pieza $p$ puede capturar en un movimiento a la pieza $q$,
 diremos que la pieza $p$ está \emph{atacando} a la pieza $q$.
 A continuación mostramos algunos ejemplos de esto.
-En el primero ejemplo, el alfil en la casilla (3, 1) está atacando a la torre en la casilla (6, 4).
+En el primer ejemplo, el alfil en la casilla (3, 1) está atacando a la torre en la casilla (6, 4).
 En el segundo, el alfil no está atacando a la torre pues el caballo en la casilla (5, 3)
 bloquea el movimiento.
 Finalmente, en el tercer ejemplo el caballo en la casilla (3, 4) está atacando al alfil
@@ -221,7 +221,7 @@ Dada la descripción del tablero, tu tarea es escribir un programa que determine
 por primera vez.
 Además existe el \emph{enroque}, la \emph{coronación} y
 capturar \emph{en passant}.
-Ninguna de estas reglas debe ser consideradas en el contexto de este problema.
+Ninguna de estas reglas debe ser considerada en el contexto de este problema.
 
 \end{problemDescription}
 
@@ -244,16 +244,16 @@ Finalmente el valor $x$ ($0\leq x \leq 7$) corresponde al índice de la columna 
 la pieza se encuentra ubicada.
 
 La cantidad de piezas respetará las reglas descritas para el ajedrez.
-Es decir, la cantidad de total de peones de cada color será menor o igual que 8, la de torres
+Es decir, la cantidad total de peones de cada color será menor o igual que 8, la de torres
 menor o igual que 2, la de caballos menor o igual que 2, la de alfiles menor o igual que 2 y la
 de reinas menor o igual que 1.
 Adicionalmente, habrá exactamente un rey negro y exactamente un rey blanco.
-Finalmente, el rey negro siempre estará en jaque.
-Es decir, al menos una pieza de color blanco estará atacando al rey negro.
+Finalmente, el rey blanco siempre estará en jaque.
+Es decir, al menos una pieza de color negro estará atacando al rey blanco.
 \end{inputDescription}
 
 \begin{outputDescription}
-Tu programa debe imprimir una única linea con solo un 1 si
+Tu programa debe imprimir una única línea con solo un 1 si
 Elizabeth (piezas negras) tiene a su oponente en jaque mate, o 0 en caso contrario.
 \end{outputDescription}
 
