@@ -7,7 +7,7 @@ def add_case(n, x, a):
     assert 1 <= n <= 1e5
     assert 1 <= x <= 1e9
     assert len(a) == n
-    assert 1 <= min(a) and max(a) <= 1e9
+    assert 1 <= min(a) and max(a) <= 1e4
     return str(n)+" "+str(x)+"\n"+' '.join(map(str, a))
 
 random.seed(str(sys.argv[1]))
@@ -32,7 +32,8 @@ elif mode == "small_big":
   maxa = maxval
   x = maxval // 2
   m = random.randint(1, n);
-  a = [random.randint(1, x // m // 2) for _ in range(m)] + [random.randint(x+1, maxa) for _ in range(n-m)]
+  maxsmall = max(x // m // 2, 1)
+  a = [random.randint(1, maxsmall) for _ in range(m)] + [random.randint(x+1, maxa) for _ in range(n-m)]
   random.shuffle(a)
 
 elif mode == "tight":
