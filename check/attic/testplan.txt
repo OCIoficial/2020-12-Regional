@@ -16,110 +16,227 @@
 
 [Subtask 1 - validators/st1.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st1/mate-bishops-only-1.in
-  1 ; copy attic/manual/st1/mate-bishops-only-2.in
-  1 ; copy attic/manual/st1/mate-bishops-only-3.in
-  1 ; copy attic/manual/st1/mate-bishops-only-4.in
-  1 ; copy attic/manual/st1/mate-knights-only-1.in
-  1 ; copy attic/manual/st1/mate-knights-only-2.in
-  1 ; copy attic/manual/st1/mate-knights-only-3.in
-  1 ; copy attic/manual/st1/mate-knights-only-4.in
-  1 ; copy attic/manual/st1/mate-knights-only-5.in
-  1 ; copy attic/manual/st1/mate-knights-only-6.in
-  1 ; copy attic/manual/st1/mate-pawns-only-1.in
-  1 ; copy attic/manual/st1/mate-pawns-only-2.in
-  1 ; copy attic/manual/st1/mate-queens-only-1.in
-  1 ; copy attic/manual/st1/mate-queens-only-2.in
-  1 ; copy attic/manual/st1/mate-queens-only-3.in
-  1 ; copy attic/manual/st1/mate-queens-only-4.in
-  1 ; copy attic/manual/st1/mate-rooks-only-1.in
-  1 ; copy attic/manual/st1/mate-rooks-only-2.in
-  1 ; copy attic/manual/st1/not-mate-knights-only-1.in
-  1 ; copy attic/manual/st1/not-mate-knights-only-2.in
-  1 ; copy attic/manual/st1/not-mate-knights-only-3.in
-  1 ; copy attic/manual/st1/not-mate-knights-only-4.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-1.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-2.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-3.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-4.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-5.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-6.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-7.in
-  1 ; copy attic/manual/st1/not-mate-rooks-only-8.in
-
-  # Use sample data as test
-  2 ; copy statement/sample-1.in
+  1 ; copy attic/manual/st1/mate-king+knights-1.in
+  1 ; copy attic/manual/st1/mate-king+knights-2.in
+  1 ; copy attic/manual/st1/mate-king+knights-3.in
+  1 ; copy attic/manual/st1/mate-king+knights-4.in
+  1 ; copy attic/manual/st1/mate-king+knights-5.in
+  1 ; copy attic/manual/st1/mate-king+knights-6.in
+  1 ; copy attic/manual/st1/mate-king+knights-7.in
+  1 ; copy attic/manual/st1/mate-king+knights-8.in
+  1 ; copy attic/manual/st1/mate-king+pawns.in
+  1 ; copy attic/manual/st1/not-mate-king+knights-1.in
+  1 ; copy attic/manual/st1/not-mate-king+knights-2.in
+  1 ; copy attic/manual/st1/not-mate-king+knights-3.in
+  1 ; copy attic/manual/st1/not-mate-king+knights-4.in
+  1 ; copy attic/manual/st1/not-mate-king+pawns-1.in
+  1 ; copy attic/manual/st1/not-mate-king+pawns-2.in
+  1 ; copy attic/manual/st1/not-mate-king+pawns-3.in
+  1 ; copy attic/manual/st1/not-mate-king+pawns-4.in
 
   # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
-  3 ; generator.py 1 2 0 2 1
-  3 ; generator.py 1 2 0 2 1
-  3 ; generator.py 1 2 0 3 1
-  3 ; generator.py 1 2 0 2 1
-  3 ; generator.py 1 2 0 4 1
-  3 ; generator.py 1 4 0 4 1
-  3 ; generator.py 1 3 0 3 1
-  3 ; generator.py 1 3 0 2 1
-  3 ; generator.py 1 2 0 2 0
-  3 ; generator.py 1 2 0 2 0
-  3 ; generator.py 1 2 0 3 0
-  3 ; generator.py 1 2 0 2 0
-  3 ; generator.py 1 2 0 4 0
-  3 ; generator.py 1 4 0 4 0
-  3 ; generator.py 1 3 0 3 0
-  3 ; generator.py 1 3 0 2 0
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+  3 ; generator.py 1 0 0 0 1
+
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+  3 ; generator.py 1 0 0 1 1
+
+  3 ; generator.py 1 0 0 2 1
+  3 ; generator.py 1 0 0 2 1
+  3 ; generator.py 1 0 0 2 1
+
+  3 ; generator.py 1 0 0 3 0
+  3 ; generator.py 1 0 0 3 0
+  3 ; generator.py 1 0 0 3 0
+  3 ; generator.py 1 0 0 3 0
+  3 ; generator.py 1 0 0 3 0
+  3 ; generator.py 1 0 0 3 0
+
+  3 ; generator.py 1 0 0 2 0
+  3 ; generator.py 1 0 0 2 0
+  3 ; generator.py 1 0 0 2 0
+  3 ; generator.py 1 0 0 2 0
+
+  3 ; generator.py 1 0 0 1 0
+  3 ; generator.py 1 0 0 1 0
+  3 ; generator.py 1 0 0 1 0
+  3 ; generator.py 1 0 0 1 0
+  3 ; generator.py 1 0 0 1 0
+  3 ; generator.py 1 0 0 1 0
+  3 ; generator.py 1 0 0 1 0
+  3 ; generator.py 1 0 0 1 0
 
 
 [Subtask 2 - validators/st2.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st2/mate-blocked-king.in
-  1 ; copy attic/manual/st2/not-mate-blocked-king.in
+  1 ; copy attic/manual/st2/mate-king-is-locked.in
+  1 ; copy attic/manual/st2/mate-rooks+bishops+queen-1.in
+  1 ; copy attic/manual/st2/mate-rooks+bishops+queen-2.in
+  1 ; copy attic/manual/st2/mate-rooks+bishops+queen-3.in
+  1 ; copy attic/manual/st2/mate-rooks+bishops+queen-4.in
+  1 ; copy attic/manual/st2/not-mate-king-can-capture.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-blocked-1.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-blocked-2.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-blocked-3.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-blocked-4.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-open-1.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-open-2.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-open-3.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-open-4.in
 
   # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
-  2 ; generator.py 2 2 0 2 1
-  2 ; generator.py 2 2 1 2 1
-  2 ; generator.py 2 2 2 0 1
-  2 ; generator.py 2 2 0 3 1
-  2 ; generator.py 2 2 1 3 1
-  2 ; generator.py 2 2 2 0 1
-  2 ; generator.py 2 2 0 2 1
-  2 ; generator.py 2 2 1 2 1
-  2 ; generator.py 2 2 2 0 1
-  2 ; generator.py 2 2 0 4 1
-  2 ; generator.py 2 2 1 4 1
-  2 ; generator.py 2 2 2 0 1
-  2 ; generator.py 2 4 0 0 1
-  2 ; generator.py 2 3 0 3 1
-  2 ; generator.py 2 3 3 3 1
-  2 ; generator.py 2 3 0 0 1
-  2 ; generator.py 2 3 3 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
+  2 ; generator.py 2 2 1 0 1
 
-  2 ; generator.py 2 2 0 2 0
-  2 ; generator.py 2 2 1 2 0
-  2 ; generator.py 2 2 2 0 0
-  2 ; generator.py 2 2 0 3 0
-  2 ; generator.py 2 2 1 3 0
-  2 ; generator.py 2 2 2 0 0
-  2 ; generator.py 2 2 0 2 0
-  2 ; generator.py 2 2 1 2 0
-  2 ; generator.py 2 2 2 0 0
-  2 ; generator.py 2 2 0 4 0
-  2 ; generator.py 2 2 1 4 0
-  2 ; generator.py 2 2 2 0 0
-  2 ; generator.py 2 4 0 0 0
-  2 ; generator.py 2 3 0 3 0
-  2 ; generator.py 2 3 3 3 0
-  2 ; generator.py 2 3 0 0 0
-  2 ; generator.py 2 3 3 0 0
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
+  2 ; generator.py 2 2 0 0 1
 
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+  2 ; generator.py 2 2 2 1 1
+
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+  2 ; generator.py 2 2 4 0 1
+
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+  2 ; generator.py 2 4 3 3 1
+
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+  2 ; generator.py 2 3 0 1 1
+
+  2 ; generator.py 2 5 4 4 0
+  2 ; generator.py 2 5 4 4 0
 
 [Subtask 3 - validators/st3.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st3/pawn-cannot-move-diagonally.in
+  1 ; copy attic/manual/st3/mate-bishops-only-1.in
+  1 ; copy attic/manual/st3/mate-bishops-only-2.in
+  1 ; copy attic/manual/st3/mate-bishops-only-3.in
+  1 ; copy attic/manual/st3/mate-bishops-only-4.in
+  1 ; copy attic/manual/st3/mate-queens-only-1.in
+  1 ; copy attic/manual/st3/mate-queens-only-2.in
+  1 ; copy attic/manual/st3/mate-queens-only-3.in
+  1 ; copy attic/manual/st3/mate-queens-only-4.in
+  1 ; copy attic/manual/st3/mate-rooks-only-1.in
+  1 ; copy attic/manual/st3/mate-rooks-only-2.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-1.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-2.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-3.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-4.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-5.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-6.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-7.in
+  1 ; copy attic/manual/st3/not-mate-rooks-only-8.in
+  1 ; copy attic/manual/st3/smothered-mate.in
+  1 ; copy attic/manual/st3/failed-smothered-mate.in
+  1 ; copy attic/manual/st3/fools-mate.in
+  1 ; copy attic/manual/st3/mate-pawn-cannot-move-diagonally.in
+  1 ; copy attic/manual/st3/mate-pinned-blocker-piece.in
+  1 ; copy attic/manual/st3/mate-pinned-capture-piece.in
+  1 ; copy attic/manual/st3/not-mate-not-pinned-blocker-piece.in
+  1 ; copy attic/manual/st3/not-mate-not-pinned-capture-piece.in
+  1 ; copy attic/manual/st3/not-mate-pawn-stops-check-by-advancing.in
+  1 ; copy attic/manual/st3/not-mate-pawn-stops-check-by-capturing.in
 
   # Use sample data as test
+  2 ; copy statement/sample-1.in
   2 ; copy statement/sample-2.in
 
   # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
+  3 ; generator.py 3 1 0 2 1
+  3 ; generator.py 3 1 1 2 1
+  3 ; generator.py 3 1 2 0 1
+  3 ; generator.py 3 1 0 3 1
+  3 ; generator.py 3 1 1 3 1
+  3 ; generator.py 3 1 2 0 1
+  3 ; generator.py 3 1 0 2 1
+  3 ; generator.py 3 1 1 2 1
+  3 ; generator.py 3 1 2 0 1
+  3 ; generator.py 3 1 0 4 1
+  3 ; generator.py 3 1 1 4 1
+  3 ; generator.py 3 1 2 0 1
+  3 ; generator.py 3 1 0 0 1
+
   3 ; generator.py 3 2 0 2 1
   3 ; generator.py 3 2 1 2 1
   3 ; generator.py 3 2 2 0 1
@@ -138,20 +255,11 @@
   3 ; generator.py 3 3 0 0 1
   3 ; generator.py 3 3 3 0 1
 
-  3 ; generator.py 3 2 0 2 0
-  3 ; generator.py 3 2 1 2 0
-  3 ; generator.py 3 2 2 0 0
-  3 ; generator.py 3 2 0 3 0
-  3 ; generator.py 3 2 1 3 0
-  3 ; generator.py 3 2 2 0 0
-  3 ; generator.py 3 2 0 2 0
-  3 ; generator.py 3 2 1 2 0
-  3 ; generator.py 3 2 2 0 0
-  3 ; generator.py 3 2 0 4 0
-  3 ; generator.py 3 2 1 4 0
-  3 ; generator.py 3 2 2 0 0
-  3 ; generator.py 3 4 0 0 0
-  3 ; generator.py 3 3 0 3 0
-  3 ; generator.py 3 3 3 3 0
-  3 ; generator.py 3 3 0 0 0
-  3 ; generator.py 3 3 3 0 0
+  3 ; generator.py 3 2 0 2 1
+  3 ; generator.py 3 2 1 2 1
+  3 ; generator.py 3 2 2 0 1
+  3 ; generator.py 3 2 0 3 1
+  3 ; generator.py 3 2 1 3 1
+  3 ; generator.py 3 2 2 0 1
+  3 ; generator.py 3 2 0 2 1
+  3 ; generator.py 3 2 1 2 1

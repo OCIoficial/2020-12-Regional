@@ -2,35 +2,53 @@
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
 
-\title{Empacador}
+\title{Empacadora de supermercado}
 
 \begin{document}
 \begin{problemDescription}
-Llega el verano y las manos a la obra.
-Te conseguiste un trabajo como empacador en un supermercado.
-La paga no es muy buena pero es algo, y es mejor que quedarse en la casa todo el día.
+Llegó el verano y Maiki ya no sabe que hacer con tanto tiempo ahora que no tiene clases.
+Para no aburrirse se consiguió un trabajo como empacadora en un supermercado.
+La paga no es muy buena pero es algo, y es mejor que quedarse en la casa sin hacer nada.
 
-Tu trabajo consiste en acompañar al cajero y recibir los productos que va marcando en la caja, tú tomas estos productos y los metes en bolsas. Los productos son de tamaños variados y la única indicación que te han dado es que si tienes una bolsa de capacidad $x$, entonces la suma de los tamaños de los productos en la bolsa debe ser al menos $x/2$.
+El trabajo es simple.
+Maiki solo debe esperar en la caja y guardar los productos que los clientes compran en bolsas.
+% Tu trabajo consiste en acompañar al cajero y recibir los productos que va marcando en la caja,
+% tú tomas estos productos y los metes en bolsas.
+Los productos son de tamaños variados y a veces es difícil determinar como distribuirlos
+en distintas bolsas.
+Como la única instrucción que le han dado es tratar de no malgastar las bolsas,
+Maiki determinó una simple estrategia.
+Dada una bolsa de capacidad $x$ se asegurará que la suma de los tamaños de todos los productos
+en la bolsa sea al menos $x/2$.
+Naturalmente, la suma debe ser también menor o igual que $x$ pues esta es la capacidad
+de la bolsa.
 
-Tu tarea es, dada una lista de productos de distintos tamaños y una bolsa de tamaño $x$, ¿puedes usar esta bolsa, o debes pedir otra? 
+Dado el tamaño $x$ de una bolsa y la lista de productos, Maiki ahora se pregunta si es siquiera
+posible escoger un subconjunto de los productos y meterlos en la bolsa de forma que se cumplan
+las restricciones anteriores.
 
 \end{problemDescription}
 
 \begin{inputDescription}
-Dos líneas. La primera tiene $N$ y $x$ ($1\leq N\leq 10^5$, $\leq x \leq 10^9$), y la segunda tiene $a_1,\ldots, a_N$ ($1\leq a_i\leq 10^9$), que son los tamaños de los productos que ha comprado el cliente.
+La entrada está descrita en dos líneas.
+La primera línea contiene dos enteros $N$ y $x$ ($1\leq N\leq 10^5$, $0 \leq x \leq 10^9$),
+correspondientes respectivamente a la cantidad de productos y la capacidad de la bolsa.
+La segunda línea contiene $n$ enteros $a_1,\ldots, a_N$ ($1\leq a_i\leq 10^4$), correspondientes
+a los tamaños de los productos.
 \end{inputDescription}
 
 \begin{outputDescription}
-La salida debe contener una sola línea con un 1 si puedes usar la bolsa en tu poder siguiendo las indicaciones, o 0 si es que debes pedir otra.
+La salida debe contener una sola línea con un 1 en caso de existir un subconjunto de los productos
+cuyos tamaños sumados sean mayor o igual a $x/2$, o 0 en caso contrario.
 \end{outputDescription}
 
 \begin{scoreDescription}
   \subtask{10}
-  $N = 2$.
+  Se probarán varios casos en los que $N = 2$.
   \subtask{40}
-  $1 \leq N, x, a_i \leq 10^3$
+  Se probarán varios casos en los que $1 \leq N, x, a_i \leq 10^3$.
   \subtask{50}
-  Restricciones originales.
+  Se probaran varios casos sin restricciones adicionales.
 \end{scoreDescription}
 
 \begin{sampleDescription}

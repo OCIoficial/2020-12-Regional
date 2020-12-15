@@ -6,34 +6,64 @@
 
 \begin{document}
 \begin{problemDescription}
-El equipo de hackers de la Organización de Cyberseguridad Informática (OCI) ha decidido hackear al gobierno. El problema es que para poder acceder a los computadores que quieren hackear, deben atravesar una serie de puertas cerradas con llave.
+El equipo de hackers de la Organización de Cyberseguridad Informática (OCI)
+ha decidido hackear al gobierno.
+Después de largas horas planeando su ataque, han determinado que la única forma es infiltrarse
+al edificio gubernamental para plantar un gusano informático en el servidor principal.
 
-Ellos tienen unas llaves y saben la forma de las cerraduras.
+El servidor principal se encuentra ubicado en la sala de informática del edificio gubernamental.
+La sala no tiene ningún tipo de resguardo, salvo que cierran con llave la puerta por las noches.
+Los hackers de la OCI han logrado obtener una copia de los planos técnicos del edificio entre los
+cuales se encuentra detallada la forma de la cerradura.
+Uno de los hackers de la OCI tiene estudios en cerrajería y fue capaz de crear una réplica de la
+llave a partir de la información en los planos.
 
-Cada llave tiene una cantidad de ``dientes'' de distintas alturas, y conocen la forma de cada cerradura, por lo que saben cuáles son las alturas necesarias para abrir cada puerta. Además, una de las hackers sabe de herrería, por lo que puede afilar los dientes y hacerlos más cortos (pero no más largos).
+Llegado el día del ataque, los hackers insertan confiados la llave en la cerradura pero para
+su sorpresa esta no encaja.
+El hacker con estudios en cerrajería asegura que aún puede arreglar la llave y salvar
+el ataque.
 
-La OCI sabe que sabes programar bien, por lo que te ha pedido ayuda para determinar si las llaves que tienen les permitirán abrir las puertas y lograr acceder a los computadores.
+La llave tiene $n$ \emph{dientes} de distintas alturas que deben alinearse con el sistema
+interno de la cerradura.
+Lamentablemente, por errores en su manufactura, las alturas de los dientes
+no se alinean perfectamente.
+El hacker con estudios en cerrajería cree que puede limar algunos dientes para arreglar la llave.
 
-Para esto, ellos te entregarán una serie de números que corresponde a una llave (las alturas de sus dientes, en orden) y una serie de números que corresponde a la forma de la cerradura (las alturas necesarias de cada diente, en orden), y tú deberás determinar si es posible afilar los dientes de la llave para abrir esa puerta.
+Cada diente puede ser limado de forma independiente reduciendo su altura, pero para preservar
+la integridad estructural de la llave solo pueden limarse a lo más $m$ dientes.
+Dado el valor máximo $m$, las alturas de los dientes de la llave y las alturas que estos deberían
+tener para poder abrir la cerradura tu tarea es determinar si es posible arreglar la llave
+limándola.
+
+% El problema es que para poder acceder a los computadores que quieren hackear, deben atravesar una serie de puertas cerradas con llave.
+% Ellos tienen unas llaves y saben la forma de las cerraduras.
+
+% Cada llave tiene una cantidad de ``dientes'' de distintas alturas, y conocen la forma de cada cerradura, por lo que saben cuáles son las alturas necesarias para abrir cada puerta. Además, una de las hackers sabe de herrería, por lo que puede afilar los dientes y hacerlos más cortos (pero no más largos).
+
+% La OCI sabe que sabes programar bien, por lo que te ha pedido ayuda para determinar si las llaves que tienen les permitirán abrir las puertas y lograr acceder a los computadores.
+
+% Para esto, ellos te entregarán una serie de números que corresponde a una llave (las alturas de sus dientes, en orden) y una serie de números que corresponde a la forma de la cerradura (las alturas necesarias de cada diente, en orden), y tú deberás determinar si es posible afilar los dientes de la llave para abrir esa puerta.
 \end{problemDescription}
 
 \begin{inputDescription}
-En la primera, un entero $n$ que representa la cantidad de dientes de la llave.\\
-En la segunda, $n$ números separados por espacios, que representan las alturas de cada diente de la llave.\\
-En la tercera, $n$ números separados por espacios, que representan las alturas necesarias de cada diente para abrir la puerta.\\
+La primera linea de la entrada contiene dos enteros $n$ y $m$ ($0 \leq m \leq n, 0 < n \leq 100$) correspondientes
+respectivamente a la cantidad de dientes en la llave y al valor máximo de llaves
+que es posible limar.
+La segunda linea contiene $n$ enteros positivos y menores o iguales que 10
+correspondientes a las alturas de cada uno de los dientes de la llave.
+Finalmente, la tercera línea contiene $n$ enteros positivos, también menores o iguales que 10,
+correspondientes a las alturas que los
+dientes deberían tener para poder abrir la cerradura.
 \end{inputDescription}
 
 \begin{outputDescription}
-Una sola línea, con ``si'' si es posible abrir la puerta, y ``no'' en caso contrario.
+La salida debe contener una sola subtarea con un \verb|si| en caso de ser posible
+limar la llave de forma que sea posible abrir la cerradura, y \verb|no| en caso contrario.
 \end{outputDescription}
 
 \begin{scoreDescription}
-  \subtask{20}
-  Los dientes de la llave y las alturas necesarias son menores a 10.
-  \subtask{30}
-  Descripción Subtarea2
-  \subtask{50}
-  Descripción Subtarea3
+    \subtask{100} Este problema contiene una sola subtarea con las restricciones descritas
+    en el enunciado.
 \end{scoreDescription}
 
 \begin{sampleDescription}
