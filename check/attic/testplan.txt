@@ -16,23 +16,23 @@
 
 [Subtask 1 - validators/st1.cpp]
   # Manual test cases
-  1 ; copy attic/manual/st1/black-king-knight-1.in
-  1 ; copy attic/manual/st1/black-king-knight-2.in
-  1 ; copy attic/manual/st1/black-king-knight-3.in
-  1 ; copy attic/manual/st1/black-king-pawns-edge.in
-  1 ; copy attic/manual/st1/white-king-black-knights-1.in
-  1 ; copy attic/manual/st1/white-king-black-knights-2.in
-  1 ; copy attic/manual/st1/white-king-black-knights-3.in
-  1 ; copy attic/manual/st1/white-king-black-knights-4.in
-  1 ; copy attic/manual/st1/white-king-black-knights-5.in
-  1 ; copy attic/manual/st1/white-king-black-knights-6.in
-  1 ; copy attic/manual/st1/white-king-black-knights-7.in
-  1 ; copy attic/manual/st1/white-king-black-knights-8.in
-  1 ; copy attic/manual/st1/white-king-black-pawns-1.in
-  1 ; copy attic/manual/st1/white-king-black-pawns-2.in
-
-  # Use sample data as test
-  2 ; copy statement/sample-1.in
+  1 ; copy attic/manual/st1/mate-king+knights-1.in
+  1 ; copy attic/manual/st1/mate-king+knights-2.in
+  1 ; copy attic/manual/st1/mate-king+knights-3.in
+  1 ; copy attic/manual/st1/mate-king+knights-4.in
+  1 ; copy attic/manual/st1/mate-king+knights-5.in
+  1 ; copy attic/manual/st1/mate-king+knights-6.in
+  1 ; copy attic/manual/st1/mate-king+knights-7.in
+  1 ; copy attic/manual/st1/mate-king+knights-8.in
+  1 ; copy attic/manual/st1/mate-king+pawns.in
+  1 ; copy attic/manual/st1/not-mate-king+knights-1.in
+  1 ; copy attic/manual/st1/not-mate-king+knights-2.in
+  1 ; copy attic/manual/st1/not-mate-king+knights-3.in
+  1 ; copy attic/manual/st1/not-mate-king+knights-4.in
+  1 ; copy attic/manual/st1/not-mate-king+pawns-1.in
+  1 ; copy attic/manual/st1/not-mate-king+pawns-2.in
+  1 ; copy attic/manual/st1/not-mate-king+pawns-3.in
+  1 ; copy attic/manual/st1/not-mate-king+pawns-4.in
 
   # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
   3 ; generator.py 1 0 0 0 1
@@ -98,6 +98,20 @@
 
 [Subtask 2 - validators/st2.cpp]
   # Manual test cases
+  1 ; copy attic/manual/st2/mate-king-is-locked.in
+  1 ; copy attic/manual/st2/mate-rooks+bishops+queen-1.in
+  1 ; copy attic/manual/st2/mate-rooks+bishops+queen-2.in
+  1 ; copy attic/manual/st2/mate-rooks+bishops+queen-3.in
+  1 ; copy attic/manual/st2/mate-rooks+bishops+queen-4.in
+  1 ; copy attic/manual/st2/not-mate-king-can-capture.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-blocked-1.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-blocked-2.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-blocked-3.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-blocked-4.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-open-1.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-open-2.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-open-3.in
+  1 ; copy attic/manual/st2/not-mate-rooks+bishops+queen-open-4.in
 
   # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
   2 ; generator.py 2 2 1 0 1
@@ -205,6 +219,7 @@
   1 ; copy attic/manual/st3/not-mate-pawn-stops-check-by-capturing.in
 
   # Use sample data as test
+  2 ; copy statement/sample-1.in
   2 ; copy statement/sample-2.in
 
   # Generated -- <caso> <piezas atacando> <extra blancas> <extra negras> <jaque>
