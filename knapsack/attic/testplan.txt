@@ -47,18 +47,18 @@
   random ; generator.py random 1000 1000
 
 [Subtask 3]
-  small ; generator.py small 10000 1000000000
-  small ; generator.py small 10000 1000000000
-  big ; generator.py big 10000 1000000000
-  big ; generator.py big 10000 1000000000
-  small_big ; generator.py small_big 10000 1000000000
-  small_big ; generator.py small_big 10000 1000000000
-  small_big ; generator.py small_big 10000 1000000000
-  small_big ; generator.py small_big 10000 1000000000
-  tight ; generator.py tight 10000 1000000000
-  tight ; generator.py tight 10000 1000000000
-  random ; generator.py random 10000 1000000000
-  random ; generator.py random 10000 1000000000
-  random ; generator.py random 10000 1000000000
-  random ; generator.py random 10000 1000000000
-  random ; generator.py random 10000 1000000000
+  small ; generator.py small 100000 10000
+  small ; generator.py small 100000 10000
+  big ; generator.py big 100000 10000
+  big ; generator.py big 100000 10000
+  small_big ; generator.py small_big 100000 10000
+  small_big ; generator.py small_big 100000 10000
+  small_big ; generator.py small_big 100000 10000
+  small_big ; generator.py small_big 100000 10000
+  tight ; generator.py tight 100000 10000
+  tight ; generator.py tight 100000 10000
+  random ; generator.py random 100000 10000
+  random ; generator.py random 100000 10000
+  random ; generator.py random 100000 10000
+  random ; generator.py random 100000 10000
+  random ; generator.py random 100000 10000
