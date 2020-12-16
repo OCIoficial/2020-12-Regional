@@ -159,22 +159,17 @@ int main() {
     ensuref(countPiece(board, black, king) == 1, "Debe haber exactamente un rey negro.");
     ensuref(!inCheck(board, black), "El rey negro no debe estar en jaque.");
 
-    ensuref(
-        max(0, countPiece(board, white, queen) - 1) +
-        max(0, countPiece(board, white, rook) - 2) +
-        max(0, countPiece(board, white, bishop) - 2) +
-        max(0, countPiece(board, white, knight) - 2) +
-        countPiece(board, white, pawn) <= 8,
-        "Demasiadas piezas blancas."
-    );
-    ensuref(
-        max(0, countPiece(board, black, queen) - 1) +
-        max(0, countPiece(board, black, rook) - 2) +
-        max(0, countPiece(board, black, bishop) - 2) +
-        max(0, countPiece(board, black, knight) - 2) +
-        countPiece(board, black, pawn) <= 8,
-        "Demasiadas piezas negras."
-    );
+    ensuref(countPiece(board, white, queen) <= 1, "Debe haber a lo más una reina blanca.");
+    ensuref(countPiece(board, white, rook) <= 2, "Debe haber a lo más dos torres blancas.");
+    ensuref(countPiece(board, white, bishop) <= 2, "Debe haber a lo más dos alfiles blancos.");
+    ensuref(countPiece(board, white, knight) <= 2, "Debe haber a lo más dos caballos blancos.");
+    ensuref(countPiece(board, white, pawn) <= 8, "Debe haber a lo más ocho peones blancos.");
+
+    ensuref(countPiece(board, black, queen) <= 1, "Debe haber a lo más una reina negra.");
+    ensuref(countPiece(board, black, rook) <= 2, "Debe haber a lo más dos torres negras.");
+    ensuref(countPiece(board, black, bishop) <= 2, "Debe haber a lo más dos alfiles negros.");
+    ensuref(countPiece(board, black, knight) <= 2, "Debe haber a lo más dos caballos negros.");
+    ensuref(countPiece(board, black, pawn) <= 8, "Debe haber a lo más ocho peones negros.");
 
     inf.readEof();
 }
