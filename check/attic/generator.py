@@ -53,7 +53,7 @@ casilla
 """
 def casillaAtacada(tablero, target, color=Color.NEGRA):
     piezas = [Torre, Alfil, Reina, Caballo, Peon, Rey]
-    ataques = [pieza.casillaAtacada(tablero, target, pieza) for pieza in piezas]
+    ataques = [pieza.casillaAtacada(tablero, target, color=color) for pieza in piezas]
     return reduce((lambda x, y: x or y), ataques)    
 
 """
@@ -168,13 +168,13 @@ class Torre(Pieza):
     Returns True si hay una torre atacando la casilla indicada.
     Tipo tiene que ser o Torre o Reina
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.TORRE, color=None):
+    def casillaAtacada(tablero, target, tipo=Tipo.TORRE, color=Color.NEGRA):
         (y, x) = target
         # Hacia arriba
         for i in range(y - 1, -1, -1):
             if tablero[i][x].tipo is Tipo.VACIA:
                 continue
-            elif tablero[i][x].tipo is tipo:
+            elif tablero[i][x].tipo is tipo and tablero[i][x].color is color:
                 return True
             else:
                 break
@@ -182,23 +182,23 @@ class Torre(Pieza):
         for i in range(y + 1, 8):
             if tablero[i][x].tipo is Tipo.VACIA:
                 continue
-            elif tablero[i][x].tipo is tipo:
+            elif tablero[i][x].tipo is tipo and tablero[i][x].color is color:
                 return True
             else:
                 break
         # Hacia la izquierda
         for i in range(x - 1, -1, -1):
-            if tablero[i][x].tipo is Tipo.VACIA:
+            if tablero[y][i].tipo is Tipo.VACIA:
                 continue
-            elif tablero[i][x].tipo is tipo:
+            elif tablero[y][i].tipo is tipo and tablero[y][i].color is color:
                 return True
             else:
                 break
         # Hacia la derecha
         for i in range(x + 1, 8):
-            if tablero[i][x].tipo is Tipo.VACIA:
+            if tablero[y][i].tipo is Tipo.VACIA:
                 continue
-            elif tablero[i][x].tipo is tipo:
+            elif tablero[y][i].tipo is tipo and tablero[y][i].color is color:
                 return True
             else:
                 break
@@ -296,7 +296,7 @@ class Alfil(Pieza):
     Returns True si hay un alfil atacando la casilla indicada.
     Tipo tiene que ser o Alfil o Reina
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.ALFIL, color=None):
+    def casillaAtacada(tablero, target, tipo=Tipo.ALFIL, color=Color.NEGRA):
         (y, x) = target
         valid = [True, True, True, True]
         for i in range(8):
@@ -306,7 +306,7 @@ class Alfil(Pieza):
                     valid[0] = False
                 elif tablero[y - i][x + i].tipo is Tipo.VACIA:
                     None # Do nothing
-                elif tablero[y - i][x + i].tipo is tipo:
+                elif tablero[y - i][x + i].tipo is tipo and tablero[y - i][x + i].color is color:
                     return True
                 else:
                     valid[0] = False
@@ -316,7 +316,7 @@ class Alfil(Pieza):
                     valid[1] = False
                 elif tablero[y - i][x - i].tipo is Tipo.VACIA:
                     None # Do nothing
-                elif tablero[y - i][x - i].tipo is tipo:
+                elif tablero[y - i][x - i].tipo is tipo and tablero[y - i][x - i].color is color:
                     return True
                 else:
                     valid[1] = False
@@ -326,7 +326,7 @@ class Alfil(Pieza):
                     valid[2] = False
                 elif tablero[y + i][x - i].tipo is Tipo.VACIA:
                     None # Do nothing
-                elif tablero[y + i][x - i].tipo is tipo:
+                elif tablero[y + i][x - i].tipo is tipo and tablero[y + i][x - i].color is color:
                     return True
                 else:
                     valid[2] = False
@@ -336,7 +336,7 @@ class Alfil(Pieza):
                     valid[3] = False
                 elif tablero[y + i][x + i].tipo is Tipo.VACIA:
                     None # Do nothing
-                elif tablero[y + i][x + i].tipo is tipo:
+                elif tablero[y + i][x + i].tipo is tipo and tablero[y + i][x + i].color is color:
                     return True
                 else:
                     valid[3] = False
@@ -393,12 +393,12 @@ class Reina(Pieza):
                 break
 
     """
-    Returns True si hay un alfil atacando la casilla indicada.
+    Returns True si hay una reina de color `color` atacando la casilla indicada.
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.REINA, color=None):
+    def casillaAtacada(tablero, target, tipo=Tipo.REINA, color=Color.NEGRA):
         (y, x) = target
-        return Torre.casillaAtacada(tablero, (y, x), tipo) or \
-                Alfil.casillaAtacada(tablero, (y, x), tipo)
+        return Torre.casillaAtacada(tablero, (y, x), tipo, color) or \
+                Alfil.casillaAtacada(tablero, (y, x), tipo, color)
 
 class Caballo(Pieza):
     def __init__(self, color):
@@ -487,12 +487,41 @@ class Caballo(Pieza):
     """
     Returns True si hay un Caballo atacando la casilla indicada.
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.CABALLO, color=None):
+    def casillaAtacada(tablero, target, tipo=Tipo.CABALLO, color=Color.NEGRA):
         (y, x) = target
-        opciones = Caballo.posiblesAtaques(tablero, (y, x))
-        for opcion in opciones:
-            if tablero[opcion[0]][opcion[1]] is tipo:
-                return True
+
+        # revisar las 8 opciones manualmente :(
+        if 0 <= y - 2:
+            if 0 <= x - 1:
+                if tablero[y - 2][x - 1].tipo is Tipo.CABALLO and tablero[y - 2][x - 1].color is color:
+                    return True
+            if 8 > x + 1:
+                if tablero[y - 2][x + 1].tipo is Tipo.CABALLO and tablero[y - 2][x + 1].color is color:
+                    return True
+
+        if 8 > y + 2:
+            if 0 <= x - 1:
+                if tablero[y + 2][x - 1].tipo is Tipo.CABALLO and tablero[y + 2][x - 1].color is color:
+                    return True
+            if 8 > x + 1:
+                if tablero[y + 2][x + 1].tipo is Tipo.CABALLO and tablero[y + 2][x + 1].color is color:
+                    return True
+
+        if 0 <= x - 2:
+            if 0 <= y - 1:
+                if tablero[y - 1][x - 2].tipo is Tipo.CABALLO and tablero[y - 1][x - 2].color is color:
+                    return True
+            if 8 > y + 1:
+                if tablero[y + 1][x - 2].tipo is Tipo.CABALLO and tablero[y + 1][x - 2].color is color:
+                    return True
+
+        if 8 > x + 2:
+            if 0 <= y - 1:
+                if tablero[y - 1][x + 2].tipo is Tipo.CABALLO and tablero[y - 1][x + 2].color is color:
+                    return True
+            if 8 > y + 1:
+                if tablero[y + 1][x + 2].tipo is Tipo.CABALLO and tablero[y + 1][x + 2].color is color:
+                    return True
         return False
 
 class Peon(Pieza):
@@ -566,10 +595,25 @@ class Peon(Pieza):
     """
     def casillaAtacada(tablero, target, tipo=Tipo.PEON, color=Color.NEGRA):
         (y, x) = target
-        opciones = Peon.posiblesAtaques(tablero, (y, x), color)
-        for opcion in opciones:
-            if tablero[opcion[0]][opcion[1]].tipo is tipo:
-                return True
+        opciones = Peon.posiblesAtaques(tablero, (y, x), color.otro())
+
+
+        if color is Color.NEGRA:
+            if y - 1 >= 0:
+                if x - 1 >= 0:
+                    if tablero[y - 1][x - 1].tipo is Tipo.PEON and tablero[y - 1][x - 1].color is Color.NEGRA:
+                        return True
+                if x + 1 < 8:
+                    if tablero[y - 1][x + 1].tipo is Tipo.PEON and tablero[y - 1][x + 1].color is Color.NEGRA:
+                        return True
+        else:
+            if y + 1 < 8:
+                if x - 1 >= 0:
+                    if tablero[y + 1][x - 1].tipo is Tipo.PEON and tablero[y + 1][x - 1].color is Color.BLANCA:
+                        return True
+                if x + 1 < 8:
+                    if tablero[y + 1][x + 1].tipo is Tipo.PEON and tablero[y + 1][x + 1].color is Color.BLANCA:
+                        return True
         return False
 
 class Rey(Pieza):
@@ -619,22 +663,23 @@ class Rey(Pieza):
         assert(color is Color.NEGRA)
         rey = encontrarReyBlanco(tablero)
 
-        for i in range(INTENTOS * 2):
+        for i in range(INTENTOS * 8):
             x = random.randint(0, 7)
             y = random.randint(0, 7)
-            if tablero[y][x].tipo is Tipo.VACIA and \
+            if not casillaAtacada(tablero, (y, x), Color.BLANCA) and tablero[y][x].tipo is Tipo.VACIA and \
                     not amenazaAlRey(Rey, tablero, (y, x), rey):
                 tablero[y][x] = Rey(color)
                 break
 
     """
-    Returns True si hay un Rey atacando la casilla indicada.
+    Returns True si hay un Rey de color `color` atacando la casilla indicada.
     """
-    def casillaAtacada(tablero, target, tipo=Tipo.REY, color=None):
+    def casillaAtacada(tablero, target, tipo=Tipo.REY, color=Color.NEGRA):
         (y, x) = target
         opciones = Rey.posiblesAtaques(tablero, (y, x))
         for opcion in opciones:
-            if tablero[opcion[0]][opcion[1]].tipo is tipo:
+            opcionPieza = tablero[opcion[0]][opcion[1]]
+            if opcionPieza.tipo is tipo and opcionPieza.color is color:
                 return True
         return False
 
@@ -683,9 +728,6 @@ mate = int(sys.argv[6])
 tablero = [[Pieza(Tipo.VACIA, Color.NEGRA) for _ in range(8)] for _ in range(8)]
 Rey.ponerRandom(tablero, Color.BLANCA)
 reyBlanco = encontrarReyBlanco(tablero)
-
-Rey.posicionarExtra(tablero, Color.NEGRA)
-reyNegro = encontrarReyNegro(tablero)
 
 opcionesBlanco = [Torre] * 2 +  [Alfil] * 2 + [Reina] + [Caballo] * 2 + \
         [Peon] * 8
@@ -751,13 +793,6 @@ if caso == 2:
     # En este caso los ataques de peones o caballos no pueden ser bloqueados
     # por otras piezas
     assert(nPiezasAtk >= 2)
-    for _ in range(nPiezasAtk):
-        for _ in range(INTENTOS):
-            pieza = random.choice(opcionesFlat)
-            if pieza in opcionesNegro:
-                if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
-                    opcionesNegro.remove(pieza)
-                    break
     for _ in range(nPiezasExtraBlanca):
         for _ in range(INTENTOS):
             pieza = random.choice(opcionesFlat)
@@ -772,6 +807,13 @@ if caso == 2:
                 opcionesNegro.remove(pieza)
                 pieza.posicionarExtra(tablero, Color.NEGRA)
                 break
+    for _ in range(nPiezasAtk):
+        for _ in range(INTENTOS):
+            pieza = random.choice(opcionesFlat)
+            if pieza in opcionesNegro:
+                if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
+                    opcionesNegro.remove(pieza)
+                    break
 
     # Cubrir toda el area al rededor del rey
     if mate == 1:
@@ -806,15 +848,6 @@ if caso == 2:
                                         break
 
 if caso == 3:
-    # En este caso los ataques de peones o caballos no pueden ser bloqueados
-    # por otras piezas
-    for _ in range(nPiezasAtk):
-        for _ in range(INTENTOS):
-            pieza = random.choice(opcionesFlat)
-            if pieza in opcionesNegro:
-                if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
-                    opcionesNegro.remove(pieza)
-                    break
     for _ in range(nPiezasExtraBlanca):
         for _ in range(INTENTOS):
             pieza = random.choice(opcionesFlat)
@@ -829,6 +862,13 @@ if caso == 3:
                 opcionesNegro.remove(pieza)
                 pieza.posicionarExtra(tablero, Color.NEGRA)
                 break
+    for _ in range(nPiezasAtk):
+        for _ in range(INTENTOS):
+            pieza = random.choice(opcionesFlat)
+            if pieza in opcionesNegro:
+                if pieza.posicionarAtaque(tablero, reyBlanco, Color.NEGRA):
+                    opcionesNegro.remove(pieza)
+                    break
 
     # Cubrir toda el area al rededor del rey
     if mate == 1:
@@ -861,6 +901,9 @@ if caso == 3:
                                     if pieza.posicionarAtaque(tablero, target, Color.NEGRA):
                                         opcionesNegro.remove(pieza)
                                         break
+
+Rey.posicionarExtra(tablero, Color.NEGRA)
+reyNegro = encontrarReyNegro(tablero)
 
 
 print(contarPiezas(tablero))
