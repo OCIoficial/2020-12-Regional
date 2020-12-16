@@ -20,7 +20,7 @@ a = []
 
 if mode == "small":
   x = maxval
-  maxa = x // n // 2
+  maxa = min(10000, x // n // 2)
   a = [random.randint(1, maxa) for _ in range(n)]
 
 elif mode == "big":
@@ -31,7 +31,7 @@ elif mode == "big":
 elif mode == "small_big":
   maxa = maxval
   x = maxval // 2
-  m = random.randint(1, n);
+  m = random.randint(1, min(x,n));
   maxsmall = max(x // m // 2, 1)
   a = [random.randint(1, maxsmall) for _ in range(m)] + [random.randint(x+1, maxa) for _ in range(n-m)]
   random.shuffle(a)
@@ -39,11 +39,11 @@ elif mode == "small_big":
 elif mode == "tight":
   x = maxval
   maxa = x // n
-  a = [random.randint(1, maxa) for _ in range(n)]
+  a = [random.randint(1, maxa-1) for _ in range(n)]
 
-elif mode == "random":
-  maxa = maxval
-  x = random.randint(1, maxa)
+elif mode == "spread":
+  maxa = min(10000, maxval)
+  x = random.randint(1, maxval)
   a = [random.randint(1, maxa) for _ in range(n)]
 
 case = add_case(n, x, a)
