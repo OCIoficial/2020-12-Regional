@@ -1,8 +1,8 @@
 {
     "tasks": [
         "llave",
-        "check",
+        "jaque",
         "lokomon",
-        "knapsack"
+        "bolsa"
     ]
 }
