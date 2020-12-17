@@ -210,12 +210,10 @@ bool is_direction_in_check(Board board, int y, int x, int dy, int dx) {
 */
 bool can_avoid_check(Board board, int y, int x) {
     switch (GET_PIECE(board[y][x])) {
-        case rook:
         case queen:
             for (auto direction: ROOK_DIRECTIONS) {
                 if (!is_direction_in_check(board, y, x, direction[0], direction[1])) return true;
             }
-            if (GET_PIECE(board[y][x]) == rook) break;
         case bishop:
             for (auto direction: BISHOP_DIRECTIONS) {
                 if (!is_direction_in_check(board, y, x, direction[0], direction[1])) return true;

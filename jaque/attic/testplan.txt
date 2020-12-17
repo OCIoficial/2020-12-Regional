@@ -104,12 +104,12 @@
   1 ; copy attic/manual/st3/not-mate-king-can-capture.in
   1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-blockable-1.in
   1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-blockable-2.in
-  1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-blocked-1.in
+  1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-blockable-3.in
   1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-blocked-2.in
   1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-capturable-1.in
   1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-capturable-2.in
+  1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-capturable-3.in
   1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-open-1.in
-  1 ; copy attic/manual/st3/not-mate-rooks+bishops+queen-open-2.in
 
   # Use sample data as test
   2 ; copy statement/sample-1.in
