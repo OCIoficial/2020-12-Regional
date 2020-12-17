@@ -10,13 +10,13 @@ using namespace std;
 #define WHITE_SQUARE "\033[30;47m"
 #define RESET "\033[0m"
 
-#define GET_COLOR(item) (item & 0x18)
-#define GET_PIECE(item) (item & 0x07)
+#define GET_COLOR(item) (item & 030)
+#define GET_PIECE(item) (item & 007)
 
 typedef array<int, 8> Rank;
 typedef array<Rank, 8> Board;
 
-enum Color { white = 16, black = 24 };
+enum Color { white = 020, black = 030 };
 enum Piece { rook, bishop, queen, king, knight, pawn };
 
 const int ROOK_DIRECTIONS[][2] = {
@@ -58,7 +58,7 @@ const int PAWN_MOVES[][2] = {
 /**
     Displays a board on stderr.
 */
-void debug_board(Board board) {
+void debug_board(const Board &board) {
     for (int i = 0; i < 8; i++) {
         for (int j = 0; j < 8; j++) {
             bool is_white_square = i % 2 == j % 2;
@@ -97,7 +97,7 @@ bool valid_coordinates(int y, int x) {
 /**
     Returns whether the white king is in check in the given board.
 */
-bool is_white_king_in_check(Board board) {
+bool is_white_king_in_check(const Board &board) {
     // Find white king
     int ky, kx;
     bool found = false;
@@ -164,7 +164,7 @@ bool is_white_king_in_check(Board board) {
 /**
     Returns whether the white king is in check if the move (y, x) -> (ty, tx) is made.
 */
-bool is_next_move_white_king_in_check(Board board, int y, int x, int ty, int tx) {
+bool is_next_move_white_king_in_check(Board &board, int y, int x, int ty, int tx) {
     int captured = board[ty][tx];
     board[ty][tx] = board[y][x];
     board[y][x] = 0;
@@ -181,7 +181,7 @@ bool is_next_move_white_king_in_check(Board board, int y, int x, int ty, int tx)
 /**
     Returns whether the piece at (y, x) can stop the white king from being in check by moving in the direction given by (my, mx).
 */
-bool is_move_in_check(Board board, int y, int x, int my, int mx) {
+bool is_move_in_check(Board &board, int y, int x, int my, int mx) {
     int ty = y + my;
     int tx = x + mx;
     if (!valid_coordinates(ty, tx)) return true;
@@ -194,7 +194,7 @@ bool is_move_in_check(Board board, int y, int x, int my, int mx) {
 /**
     Returns whether the piece at (y, x) can stop the white king from being in check by moving in the direction given by (dy, dx).
 */
-bool is_direction_in_check(Board board, int y, int x, int dy, int dx) {
+bool is_direction_in_check(Board &board, int y, int x, int dy, int dx) {
     for (int ty = y + dy, tx = x + dx; ; ty += dy, tx += dx) {
         if (!valid_coordinates(ty, tx)) return true;
         int captured = board[ty][tx];
@@ -208,7 +208,7 @@ bool is_direction_in_check(Board board, int y, int x, int dy, int dx) {
 /**
     Returns whether the piece at (y, x) can stop the white king from being in check.
 */
-bool can_avoid_check(Board board, int y, int x) {
+bool can_avoid_check(Board &board, int y, int x) {
     switch (GET_PIECE(board[y][x])) {
         case rook:
         case queen:
@@ -254,7 +254,7 @@ bool can_avoid_check(Board board, int y, int x) {
 /**
     Resolves whether the given piece tuples represent black checkmating white or not.
 */
-bool is_checkmate_over_white(vector< vector< int > > pieces) {
+bool is_checkmate_over_white(const vector< vector< int > > &pieces) {
     Board board = {};
 
     for (auto props: pieces) {
