@@ -10,7 +10,7 @@
 
 Tu amigo Ashvier, un osado maestro lokómon, logró escalar hasta la cima de la montaña más alta de
 la Cordillera Norte.
-Tras una larga batalla, su misión ha sido todo un éxito y logró capturar al lokómon legendario Blatiaz.
+Tras una larga batalla, su misión ha sido todo un éxito y consiguió capturar al lokómon legendario Blatiaz.
 % ¡Esta increíble hazaña aparecerá en los libros de historia!
 
 Ashvier ahora debe descender y regresar al centro lokómon
@@ -28,7 +28,7 @@ Las montañas son enumeradas de izquierda a derecha entre 0 y $n-1$.
 La habilidad de Blatiaz le permite planear desde la cima de una montaña
 hasta la cima de otra montaña más baja, siempre y cuando una montaña más alta no bloquee
 el desplazamiento.
-Dadas dos montañas en posiciones $i$ y $j$ con alturas $h_i$ y $h_j$ ($h_j < h_i$) respectivamente,
+Dadas dos montañas en posiciones $i$ y $j$, con alturas $h_i$ y $h_j$ ($h_j < h_i$) respectivamente,
 decimos que una montaña en la posición $k$ ($min(i, j) < k < max(i, j)$) \emph{bloquea} el
 desplazamiento si su altura $h_k$ es mayor o igual que $h_i$.
 
@@ -39,9 +39,9 @@ desplazamiento si su altura $h_k$ es mayor o igual que $h_i$.
 
 A continuación se muestra un ejemplo para $n=4$ montañas.
 En la figura de la izquierda se puede apreciar que Blatiaz puede descender desde la montaña 2
-hasta la montaña 0 pues esta es de menor altura.
+hasta la montaña 0, pues esta es de menor altura.
 Por el contrario, como se muestra en la figura de la derecha, no es posible descender de la
-montaña 0 hacia la montaña 3 pues, a pesar de que la montaña 3 es más baja, la montaña 2 bloquea el
+montaña 0 hacia la montaña 3, pues, a pesar de que la montaña 3 es más baja, la montaña 2 bloquea el
 desplazamiento.
 
 \begin{center}
@@ -50,8 +50,8 @@ desplazamiento.
 \includegraphics[width=0.48\textwidth]{disallowed.png}
 \end{center}
 
-Desde la montaña 2, Blatiaz también podría descender a las montañas 1 y 3 pero
-como es su primera vez planeado sobre Blastiaz, Ashvier tomará algunas precauciones.
+Desde la montaña 2, Blatiaz también podría descender a las montañas 1 y 3, pero
+como es su primera vez planeado sobre Blatiaz, Ashvier tomará algunas precauciones.
 Partiendo de la cima de la montaña más alta, Ashvier siempre descenderá a la cima de
 {\bf la montaña más alta que no esté bloqueada}.
 Siguiendo este proceso, llegará a una montaña desde la cual no es posible seguir descendiendo.
@@ -59,7 +59,7 @@ Llamaremos a esta montaña la \emph{montaña final}.
 
 Dada la descripción de las montañas, a Ashvier le gustaría saber cuál será la
 montaña final.
-De esta forma puede avisarle de antemano a su amigo el profesor Perezoak, quién lo estará
+De esta forma puede avisarle de antemano a su amigo el profesor Perezoak, quien lo estará
 esperando para llevarlos al centro lokómon.
 ?`Podrías ayudarlos?
 
@@ -86,7 +86,7 @@ esperando para llevarlos al centro lokómon.
 La entrada consiste de dos líneas.
 La primera contiene un solo entero $n$ ($2 \leq n \leq 1\,000\,000$)
 correspondiente al número de montañas que conforman la Cordillera Norte.
-La segunda línea contiene $n$ enteros describiendo las montañas.
+La segunda línea contiene $n$ enteros que describen las montañas.
 El primer entero corresponde a la posición de la montaña más alta, el segundo a la posición
 de la segunda montaña más alta y así hasta el último entero que corresponde a la posición
 de la montaña más baja.
@@ -94,14 +94,14 @@ de la montaña más baja.
 \end{inputDescription}
 
 \begin{outputDescription}
-La salida de contener un único entero, correspondiente a la posición de la \emph{montaña final}.
+La salida debe contener un único entero, correspondiente a la posición de la \emph{montaña final}.
 \end{outputDescription}
 
 \begin{scoreDescription}
   \subtask{30}
-  Se probarán varios casos en los que $n<1000$.
+  Se probará varios casos en los que $n<1000$.
   \subtask{70}
-  Se probarán varios casos sin restricciones adicionales.
+  Se probará varios casos sin restricciones adicionales.
 \end{scoreDescription}
 
 \begin{sampleDescription}
