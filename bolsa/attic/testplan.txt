@@ -12,7 +12,7 @@
 # To generate test cases using test plan use `ocimatic gen-input`
 
 
-[Subtask 1]
+[Subtask 1 - validators/st1.cpp]
   custom ; copy attic/custom/test1.in
   custom ; copy attic/custom/test2.in
   custom ; copy attic/custom/test3.in
@@ -33,7 +33,7 @@
   spread ; generator.py spread 2 100
   spread ; generator.py spread 2 100
 
-[Subtask 2]
+[Subtask 2 - validators/st2.cpp]
   custom ; copy attic/custom/test4.in
   custom ; copy attic/custom/test5.in
   custom ; copy attic/custom/test6.in
@@ -53,7 +53,7 @@
   spread ; generator.py spread 1000 1000
   spread ; generator.py spread 1000 1000
 
-[Subtask 3]
+[Subtask 3 - validators/st3.cpp]
   custom ; copy attic/custom/test4.in
   custom ; copy attic/custom/test5.in
   custom ; copy attic/custom/test6.in
